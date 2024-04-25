@@ -5,7 +5,7 @@ const fs = require("fs");
 const DB_HOST = process.env.DB_HOST || "127.0.0.1";
 const DB_USER = process.env.DB_USER || "root";
 const DB_PASS = process.env.DB_PASS || "";
-const DB_NAME = process.env.DB_NAME || "favorite";
+const DB_NAME = process.env.DB_NAME || "skinfinity";
 
 const con = mysql.createConnection({
   host: DB_HOST,
@@ -28,7 +28,7 @@ con.connect(function(err) {
       console.error("Error creating tables:", err);
       return;
     }
-    console.log("Table creation `recipes` was successful!");
+    console.log("Table creation `users` was successful!");
     console.log("Closing connection...");
     con.end();
   });
