@@ -16,7 +16,7 @@ module.exports = async function db(query) {
       host: DB_HOST,
       user: DB_USER || "root",
       password: DB_PASS,
-      database: DB_NAME || "favorite",
+      database: DB_NAME || "skinfinity",
       multipleStatements: true
     });
 
