@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 function NewUser() {
-  //   const [user_id, setUser_id] = useState("");
+  const [user_id, setUser_id] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ function NewUser() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // user_id: user_id,
+        user_id: user_id,
         firstname: firstname,
         lastname: lastname,
         password: password,
@@ -38,7 +38,7 @@ function NewUser() {
         console.error("Error creating user account:", error.message);
       });
     // Clear the form inputs after successful submission
-    // setUser_id("");
+    setUser_id("");
     setFirstname("");
     setLastname("");
     setPassword("");
@@ -49,7 +49,7 @@ function NewUser() {
     <div className="App" style={{ width: "30rem" }}>
       <h1 className="title">Create account</h1>
       <form className="form">
-        {/* <div>
+        <div>
           <label className="form-label">Username:</label>
           <input
             type="text"
@@ -58,7 +58,7 @@ function NewUser() {
             className="form-control"
             style={{ width: "40%" }}
           />
-        </div> */}
+        </div>
         <div>
           <label className="form-label">First Name:</label>
           <input
