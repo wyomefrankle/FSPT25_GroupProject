@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Modal from "./Modal";
+// import Modal from "./Modal";
+// import { Modal } from "react-bootstrap";
+
 function NewUser() {
   const [user_id, setUser_id] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -47,7 +49,7 @@ function NewUser() {
   };
   return (
     <div className="App" style={{ width: "30rem" }}>
-      <h1 className="title">Create account</h1>
+      <h1 className="title">New User</h1>
       <form className="form">
         <div>
           <label className="form-label">Username:</label>
@@ -109,11 +111,14 @@ function NewUser() {
             style={{ width: "40%" }}
           />
         </div>
-        <Modal
+        {/* <Modal
           launchBtnText="Create Account"
           modalTitle="User successfully created! "
           handleCreateAccount={handleCreateAccount}
-        />
+        /> */}
+
+        {/* Having issues with accessing the Modal so commented it out for now*/}
+        <button onClick={() => handleCreateAccount}>Submit</button>
       </form>
     </div>
   );
