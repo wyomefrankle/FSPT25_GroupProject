@@ -43,7 +43,6 @@ The expected format for each product recommendation is as follows:
   "brand": "Brand Name",
   "name": "Product Name",
   "price": "Price",
-  "description": "Description of the product",
   "imageURL": "URL of the product image"
 }
 

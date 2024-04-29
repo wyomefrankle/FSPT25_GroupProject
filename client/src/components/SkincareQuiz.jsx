@@ -38,6 +38,7 @@ const SkincareQuiz = () => {
       const data = await response.json();
       console.log("Data from server:", data);
     setSkincareRecommendations(data.text);
+    console.log("Product type is: ", JSON.parse(data.text)[0].product_type)
       setLoading(false);
       
     } catch (error) {
@@ -48,9 +49,9 @@ const SkincareQuiz = () => {
   };
 
   // Call getSkincareQuiz when component mounts
-  useEffect(() => {
-    getSkincareQuiz(skintype, budget, country, skinconcern);
-  }, []);
+  // useEffect(() => {
+  //   getSkincareQuiz(skintype, budget, country, skinconcern);
+  // }, []);
 
   const handleBudget = event => {
     setBudget(event.target.value);
