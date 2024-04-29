@@ -3,11 +3,11 @@ import { useState } from "react";
 // import { Modal } from "react-bootstrap";
 
 function NewUser() {
-  const [user_id, setUser_id] = useState("");
+  //   const [user_id, setUser_id] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [skintype, setSkintype] = useState("");
 
   const handleCreateAccount = () => {
@@ -17,11 +17,11 @@ function NewUser() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_id: user_id,
+        // user_id: user_id,
         firstname: firstname,
         lastname: lastname,
-        password: password,
         email: email,
+        password: password,
         skintype: skintype,
       }),
     })
@@ -40,7 +40,7 @@ function NewUser() {
         console.error("Error creating user account:", error.message);
       });
     // Clear the form inputs after successful submission
-    setUser_id("");
+    // setUser_id("");
     setFirstname("");
     setLastname("");
     setPassword("");
@@ -49,9 +49,12 @@ function NewUser() {
   };
   return (
     <div className="App" style={{ width: "30rem" }}>
-      <h1 className="title">New User</h1>
+      <h1 className="title">Create Account</h1>
+      <p className="new-user-message">
+        Sign up to save your favorite products!
+      </p>
       <form className="form">
-        <div>
+        {/* <div>
           <label className="form-label">Username:</label>
           <input
             type="text"
@@ -60,7 +63,7 @@ function NewUser() {
             className="form-control"
             style={{ width: "40%" }}
           />
-        </div>
+        </div> */}
         <div>
           <label className="form-label">First Name:</label>
           <input
@@ -82,21 +85,21 @@ function NewUser() {
           />
         </div>
         <div>
-          <label className="form-label">Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="form-control"
-            style={{ width: "40%" }}
-          />
-        </div>
-        <div>
           <label className="form-label">Email:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="form-control-email"
+            style={{ width: "40%" }}
+          />
+        </div>
+        <div>
+          <label className="form-label">Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="form-control"
             style={{ width: "40%" }}
           />
@@ -118,7 +121,14 @@ function NewUser() {
         /> */}
 
         {/* Having issues with accessing the Modal so commented it out for now*/}
-        <button onClick={() => handleCreateAccount}>Submit</button>
+        <button
+          className="new-user-submit"
+          onClick={() =>
+            handleCreateAccount && alert("Account successfully created!")
+          }
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
