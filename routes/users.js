@@ -18,11 +18,41 @@ const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 router.get('/', async (req, res) => {
   try {
   const { skintype, budget, country, skinconcern } = req.query;
-  const prompt = `Give me recommendations for skincare products for ${skintype} skin that targets ${skinconcern} that is available in ${country} and less than ${budget} USD and accessible in most stores. I want 3 product recommendations for a cleanser, 3 recommendations for a toner, 3 recommendations for a serum, 3 recommendations for a face cream. Note: Please make the output be in an easy to use object format that I can post to the backend of a full stack js app that has an SQL table like this: CREATE TABLE SkincareProducts (id INT PRIMARY KEY AUTO_INCREMENT, product_type VARCHAR(50) NOT NULL, brand VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, price DECIMAL(5,2) NOT NULL, description TEXT, imageURL TEXT). Also ensure the response is in plain text without any formatting like bold characters`
+const prompt = `
+Give me recommendations for skincare products based on the following criteria:
+
+Skin Type: ${skintype}
+Budget: less than ${budget}
+Country: ${country}
+Skin Concern: ${skinconcern}
+
+Please provide recommendations for the following product categories:
+- Cleanser: [Number of recommendations = 3]
+- Toner: [Number of recommendations = 3]
+- Serum: [Number of recommendations = 3]
+- Moisturizer: [Number of recommendations = 3]
+
+Ensure that the recommendations meet the following criteria:
+- Availability: Products should be accessible in most stores.
+- Price: All recommended products should be lower than ${budget}.
+- Format: Provide the response in a structured format suitable for backend integration with an SQL table.
+
+The expected format for each product recommendation is as follows:
+{
+  "product_type": "Cleanser/Toner/Serum/Face Cream",
+  "brand": "Brand Name",
+  "name": "Product Name",
+  "price": "Price",
+  "description": "Description of the product",
+  "imageURL": "URL of the product image"
+}
+
+Please ensure that the response is in plain text without any formatting like bold characters. Additionally, decimal numbers should use a period (.) as the decimal separator. Only display the object so that the data can be easily parsed in JSON format. Ensure each recommendation object should be separated by a newline character (\n) to ensure proper splitting and parsing. Each product recommendation should be enclosed in curly braces {}, and the entire set of recommendations should be within square brackets [] to form a JSON array.`
 
   const result = await model.generateContent(prompt);
   const response = await result.response;
   const text = response.text();
+  console.log(text)
   res.json({text});
 
 } catch (error) {
