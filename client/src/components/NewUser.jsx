@@ -10,6 +10,7 @@ function NewUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [skintype, setSkintype] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,6 +18,10 @@ function NewUser() {
   };
 
   const handleCreateAccount = () => {
+    if (!firstname || !lastname || !email || !password || !skintype) {
+      alert("Please fill in all the fields.");
+      return;
+    }
     fetch("http://localhost:4000/api/users", {
       method: "POST",
       headers: {
@@ -40,10 +45,13 @@ function NewUser() {
       .then((json) => {
         // Handle the success response from the server, e.g., show a success message
         console.log("User account created successfully:", json);
+        setError("");
+        alert("Account successfully created! 🌸");
       })
       .catch((error) => {
         // Handle errors, e.g., show an error message to the user
         console.error("Error creating user account:", error.message);
+        setError("Error creating user account");
       });
     // Clear the form inputs after successful submission
     // setUser_id("");
@@ -138,6 +146,7 @@ function NewUser() {
         <button type="submit" className="submit-button">
           Submit
         </button>
+        {error && <p className="error-message">{error}</p>}
       </form>
     </div>
   );
