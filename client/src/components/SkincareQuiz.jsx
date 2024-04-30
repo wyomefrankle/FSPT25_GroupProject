@@ -77,7 +77,6 @@ const SkincareQuiz = () => {
       <div className="container">
       {!loading && (
           <div>
-            <h2>Skincare Recommendations</h2>
             {skincareRecommendations.length > 0 && (
               // Group recommendations by product_type
               Object.entries(
@@ -128,15 +127,23 @@ const SkincareQuiz = () => {
         <select className="form-control" value={country} onChange={handleCountry} style={{ width: '40%' }}>
           <option value="the US">United States</option>
           <option value="the UK">United Kingdom</option>
-          <option value="the Netherlands">The Netherlands</option>
+          <option value="Spain">Spain</option>
+          <option value="Norway">Norway</option>
+          <option value="Canada">Canada</option>
+          <option value="South Africa">South Africa</option>
+          <option value="the Netherlands">Netherlands</option>
         </select>
       </div>
       <div className="form-group">
         <label className="form-label">Skin Concern:</label>
         <select className="form-control" value={skinconcern} onChange={handleSkinconcern} style={{ width: '40%' }}>
-          <option value="dryness">dryness</option>
-          <option value="acne">acne</option>
-          <option value="large pores">large pores</option>
+          <option value="Dryness">Dryness</option>
+          <option value="Acne">Acne</option>
+          <option value="Large pores">Large pores</option>
+          <option value="Aging">Aging</option>
+          <option value="Hyperpigmentation">Hyperpigmentation</option>
+          <option value="Redness">Redness</option>
+
         </select>
       </div>
       <button type="submit" className="submit-button">
