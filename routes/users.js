@@ -22,7 +22,7 @@ const prompt = `
 Give me recommendations for skincare products based on the following criteria:
 
 Skin Type: ${skintype}
-Budget: less than ${budget}
+Budget: less than ${budget} USD
 Country: ${country}
 Skin Concern: ${skinconcern}
 
@@ -43,7 +43,8 @@ The expected format for each product recommendation is as follows:
   "brand": "Brand Name",
   "name": "Product Name",
   "price": "Price",
-  "imageURL": "URL of the product image"
+  "imageURL": "URL of the product image",
+  "productURL": "URL of the product"
 }
 
 Please ensure that the response is in plain text without any formatting like bold characters. Additionally, decimal numbers should use a period (.) as the decimal separator. Only display the object so that the data can be easily parsed in JSON format. Ensure each recommendation object should be separated by a newline character (\n) to ensure proper splitting and parsing. Each product recommendation should be enclosed in curly braces {}, and the entire set of recommendations should be within square brackets [] to form a JSON array.`
