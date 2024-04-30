@@ -58,10 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-<<<<<<< HEAD
           <Route path="/try-it" element={<SkincareQuiz />} />
-||||||| 1f7d7db
-=======
           <Route path="/login" element={<Login />} />
           <Route
             path="/profile"
@@ -71,7 +68,6 @@ function App() {
               </PrivateRoute>
             }
           />
->>>>>>> main
         </Routes>
       </div>
     </AddContext.Provider>
