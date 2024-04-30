@@ -51,7 +51,7 @@ function NewUser() {
       .catch((error) => {
         // Handle errors, e.g., show an error message to the user
         console.error("Error creating user account:", error.message);
-        setError("Error creating user account");
+        alert("This email is already in use, please try another one.");
       });
     // Clear the form inputs after successful submission
     // setUser_id("");
