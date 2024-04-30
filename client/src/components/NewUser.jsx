@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 // import Modal from "./Modal";
 // import { Modal } from "react-bootstrap";
 
@@ -10,8 +11,13 @@ function NewUser() {
   const [password, setPassword] = useState("");
   const [skintype, setSkintype] = useState("");
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleCreateAccount();
+  };
+
   const handleCreateAccount = () => {
-    fetch("/users", {
+    fetch("http://localhost:4000/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +59,7 @@ function NewUser() {
       <p className="new-user-message">
         Sign up to save your favorite products!
       </p>
-      <form className="form">
+      <form onSubmit={(e) => handleSubmit(e)} className="form">
         {/* <div>
           <label className="form-label">Username:</label>
           <input
@@ -121,12 +127,15 @@ function NewUser() {
         /> */}
 
         {/* Having issues with accessing the Modal so commented it out for now*/}
-        <button
+        {/* <button
           className="new-user-submit"
           onClick={() =>
             handleCreateAccount && alert("Account successfully created!")
           }
         >
+          Submit
+        </button> */}
+        <button type="submit" className="submit-button">
           Submit
         </button>
       </form>
