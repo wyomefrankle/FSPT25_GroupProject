@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./components/Home";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
+import NewUser from "./components/NewUser";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
@@ -18,7 +19,7 @@ function App() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(credentials),
       });
@@ -44,8 +45,6 @@ function App() {
     login,
     logout,
   };
-  
-
 
   return (
     <AddContext.Provider value={AddObject}>
@@ -57,6 +56,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/new-user" element={<NewUser />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/profile"

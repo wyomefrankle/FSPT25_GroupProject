@@ -30,12 +30,36 @@ nav ul li {
   gap: 25px;
 }
 
+input {
+  border-style: groove;
+  border-color: aliceblue;
+  opacity: 0.9;
+  margin: 10px;
+  text-align: center;
+}
+
+.new-user-message {
+  font-size: 15px;
+}
+
+.form-control-email {
+  margin-left: 45px;
+}
 .home-heading {
   font-size: 50px;
   text-align: center;
   padding: 30px;
   margin-top: 0px;
   margin-bottom: 100px;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.new-user-submit {
+  color: blue;
+  margin: 15px;
 }
 
 nav button.nav-link {
