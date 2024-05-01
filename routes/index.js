@@ -115,4 +115,44 @@ router.delete("/users/:id", async (req, res) => {
 
 
 
+router.get("/favorites", async (req, res) => {
+  try{
+  const results = await db("SELECT * FROM favorites;")
+      res.send(results.data);
+    } catch(err) {
+      res.status(500).send(err);
+    }
+  });
+  
+  router.post("/favorites", async (req, res) => {
+    const { product_type, brand, name, price, imageURL } = req.body;
+
+    if (imageURL.length > 255) {
+      return res.status(400).json({ error: "Image URL is too long" });
+    } 
+
+    try {
+      const results = await db(
+        `INSERT INTO favorites (product_type, brand, name, price, imageURL) VALUES ("${product_type}", "${brand}", "${name}", "${price}", "${imageURL}")`);
+
+      if (results.error) {
+        throw results.error;
+      }
+      res.status(201).json({ message: "Favorite created successfully" });
+    } catch (err) {
+      console.error("Error creating favorite:", err);
+      res.status(500).json({ error: "Internal Server Error", details: err.message });
+    }
+  });
+
+  router.delete("/favorites/:id", async(req, res) => {
+    try {
+      const results = await db(
+        `DELETE FROM favorites WHERE id = ${req.params.id}`);
+      res.status(200).json({ message: "Favorite deleted successfully" });
+    } catch (err) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
+
 module.exports = router;

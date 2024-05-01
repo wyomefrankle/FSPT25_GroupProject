@@ -39,6 +39,7 @@ function Login() {
 
     return (
         <div>
+          <h1>SKINFINITY </h1>
           <div>
             <input
               value={email}
