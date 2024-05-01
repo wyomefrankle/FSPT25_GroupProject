@@ -29,6 +29,7 @@ con.connect(function(err) {
       return;
     }
     console.log("Table creation `users` was successful!");
+    console.log("Table creation `favorites` was successful!");
     console.log("Closing connection...");
     con.end();
   });

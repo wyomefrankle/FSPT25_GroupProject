@@ -14,18 +14,18 @@
   background: rgb(0, 18, 255);
   background: linear-gradient(
     0deg,
-    rgba(0, 18, 255, 1) 16%,
-    rgba(255, 255, 255, 1) 100%
+    rgb(176, 176, 180) 16%,
+    rgb(18, 17, 17) 100%
   );
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #e5e6f6;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #e5e6f6;
 }
 
 body {

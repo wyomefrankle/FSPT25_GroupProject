@@ -23,4 +23,16 @@ CREATE TABLE users(
     PRIMARY KEY (id)
 );
 
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS favorites;
+
+CREATE TABLE favorites(
+   id INT AUTO_INCREMENT PRIMARY KEY,
+    product_type VARCHAR(100),
+    brand VARCHAR(100),
+    name VARCHAR(100),
+    price DECIMAL(10, 2),
+    imageURL VARCHAR(255) 
+
+);
 
