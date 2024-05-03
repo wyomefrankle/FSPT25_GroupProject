@@ -23,4 +23,18 @@ CREATE TABLE users(
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS favorites;
 
+CREATE TABLE favorites(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,  -- Reference to the users table
+    product_type VARCHAR(100),
+    brand VARCHAR(100),
+    name VARCHAR(100),
+    price DECIMAL(10, 2),
+    imageURL VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Enable foreign key checks
+SET foreign_key_checks = 1;

@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import SkincareQuiz from "./components/SkincareQuiz";
+import NewUser from "./components/NewUser";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
@@ -19,7 +20,7 @@ function App() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(credentials),
       });
@@ -28,10 +29,10 @@ function App() {
         localStorage.setItem("token", token);
         setIsLoggedIn(true);
       } else {
-        console.error("Login Failed");
+        throw new Error("Incorrect email or password. Please try again.");
       }
     } catch (error) {
-      console.error("Error logging in:", error.message);
+      throw new Error("Error logging in:", + error.message);
     }
   };
 
@@ -45,20 +46,19 @@ function App() {
     login,
     logout,
   };
-  
-
 
   return (
     <AddContext.Provider value={AddObject}>
       <div className="App">
         <h1 className={location.pathname === "/" ? "home-heading" : ""}>
-          Skinfinity
+          {/* Skinfinity */}
         </h1>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/try-it" element={<SkincareQuiz />} />
+          <Route path="/new-user" element={<NewUser />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/profile"
