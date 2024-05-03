@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import Favorites from "./Favorites";
 
 export default function Profile() {
     const [data, setData] = useState(null);
@@ -34,6 +34,7 @@ export default function Profile() {
     return (
         <div>
             <h1>Profile</h1>
+            <Favorites/>
             {data && (
                 <div className="text-center p-4">
         </div>
