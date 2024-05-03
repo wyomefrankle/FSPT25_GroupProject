@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom"; 
+import SaveFavoriteModal from "./SaveFavoriteModal";
 
 // import './App.css';
 
@@ -12,9 +13,9 @@ const SkincareQuiz = () => {
     const [skincareRecommendations, setSkincareRecommendations] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const serumImages = ["https://5.imimg.com/data5/RN/QW/LK/SELLER-3074232/face-serum.jpg", "https://plus.unsplash.com/premium_photo-1669735916387-24340468a65c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNlcnVtJTIwYm90dGxlfGVufDB8fDB8fHww", "https://images.unsplash.com/photo-1608571424266-edeb9bbefdec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTc1fHxza2luY2FyZXxlbnwwfHwwfHx8MA%3D%3D"]
-    const moisturizerImages = ["https://t4.ftcdn.net/jpg/06/49/44/83/360_F_649448391_pnUFms5Im2sZ5rKh168XQjiP0wabz56O.jpg", "https://plus.unsplash.com/premium_photo-1669735916387-24340468a65c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNlcnVtJTIwYm90dGxlfGVufDB8fDB8fHww", "https://img.freepik.com/premium-photo/blank-cosmetic-cream-tube-mockup_590726-162.jpg"]
-    const tonerImages = ["https://5.imimg.com/data5/RN/QW/LK/SELLER-3074232/face-serum.jpg", "https://plus.unsplash.com/premium_photo-1669735916387-24340468a65c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNlcnVtJTIwYm90dGxlfGVufDB8fDB8fHww", "https://images.unsplash.com/photo-1608571424266-edeb9bbefdec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTc1fHxza2luY2FyZXxlbnwwfHwwfHx8MA%3D%3D"]
-    const cleanserImages = ["https://images.unsplash.com/photo-1623143445418-40c192fa3d11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2tpbmNhcmUlMjBtb2NrdXB8ZW58MHx8MHx8fDA%3D", "https://images.unsplash.com/photo-1608571424266-edeb9bbefdec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTc1fHxza2luY2FyZXxlbnwwfHwwfHx8MA%3D%3D"]
+    const moisturizerImages = ["https://t4.ftcdn.net/jpg/06/49/44/83/360_F_649448391_pnUFms5Im2sZ5rKh168XQjiP0wabz56O.jpg", "https://plus.unsplash.com/premium_photo-1681364365252-387c05c06c40?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww", "https://img.freepik.com/premium-photo/blank-cosmetic-cream-tube-mockup_590726-162.jpg"]
+    const tonerImages = ["https://beautymag.com/wp-content/uploads/2020/10/Best-Toners-for-Oily-Skin-scaled.jpg", "https://unblast.com/wp-content/uploads/2021/01/Skin-Care-Bottle-Mockup.jpg", "https://images.unsplash.com/photo-1609097164721-d8b247a6bd6b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHNraW5jYXJlJTIwYm90dGxlfGVufDB8fDB8fHww"]
+    const cleanserImages = ["https://images.unsplash.com/photo-1623143445418-40c192fa3d11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2tpbmNhcmUlMjBtb2NrdXB8ZW58MHx8MHx8fDA%3D", "https://images.unsplash.com/photo-1597931752949-98c74b5b159f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww", "https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww"]
 
     // const [skintype, setSkintype] = useState("");
 
@@ -90,6 +91,34 @@ const SkincareQuiz = () => {
         return "https://via.placeholder.com/150"; // Default image
     }
   }
+
+  const saveFavorite = async (product) => { 
+    try {
+        const response = await fetch(`http://localhost:4000/api/favorites`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ product }) 
+        });
+  
+        if (!response.ok) {
+            throw new Error(`Failed to save favorite product: ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        console.log('Response from server:', data);
+        // setMyFavorites(data)
+    } catch (error) {
+        console.error('Error saving favorite product:', error);
+    }
+};
+
+
+  const handleSaveFavorite = (product) => {
+      saveFavorite(product);
+      console.log(product);
+  };
   
   return (
     <div>
@@ -124,6 +153,12 @@ const SkincareQuiz = () => {
                             rel="noopener noreferrer">
                             <strong className='card-text'>Product URL</strong>
                           </a>
+                          <SaveFavoriteModal
+                      launchBtnText="Save Favorite"
+                      modalTitle="Product saved to favorites! 🛒"
+                      recommendation={recommendation}
+                      handleSaveFavorite={handleSaveFavorite}
+                    />
                         </div>
                       </div>
                     ))}
