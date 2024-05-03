@@ -28,10 +28,10 @@ function App() {
         localStorage.setItem("token", token);
         setIsLoggedIn(true);
       } else {
-        console.error("Login Failed");
+        throw new Error("Incorrect email or password. Please try again.");
       }
     } catch (error) {
-      console.error("Error logging in:", error.message);
+      throw new Error("Error logging in:", + error.message);
     }
   };
 

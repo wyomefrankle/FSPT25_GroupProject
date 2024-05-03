@@ -115,16 +115,16 @@ router.delete("/users/:id", async (req, res) => {
 
 
 
-router.get("/favorites", async (req, res) => {
+router.get("/favorites", userShouldBeLoggedin, async (req, res) => {
   try{
-  const results = await db("SELECT * FROM favorites;")
+  const results = await db(`SELECT * FROM favorites WHERE user_id = ${req.user_id}`);
       res.send(results.data);
     } catch(err) {
       res.status(500).send(err);
     }
   });
   
-  router.post("/favorites", async (req, res) => {
+  router.post("/favorites", userShouldBeLoggedin, async (req, res) => {
     const { product_type, brand, name, price, imageURL } = req.body;
 
     if (imageURL.length > 255) {
@@ -133,7 +133,7 @@ router.get("/favorites", async (req, res) => {
 
     try {
       const results = await db(
-        `INSERT INTO favorites (product_type, brand, name, price, imageURL) VALUES ("${product_type}", "${brand}", "${name}", "${price}", "${imageURL}")`);
+        `INSERT INTO favorites (user_id, product_type, brand, name, price, imageURL) VALUES ("${req.user_id}", "${product_type}", "${brand}", "${name}", "${price}", "${imageURL}")`);
 
       if (results.error) {
         throw results.error;
@@ -145,10 +145,10 @@ router.get("/favorites", async (req, res) => {
     }
   });
 
-  router.delete("/favorites/:id", async(req, res) => {
+  router.delete("/favorites/:id", userShouldBeLoggedin, async(req, res) => {
     try {
       const results = await db(
-        `DELETE FROM favorites WHERE id = ${req.params.id}`);
+        `DELETE FROM favorites WHERE id = ${req.params.id} AND user_id = ${req.user_id}`);
       res.status(200).json({ message: "Favorite deleted successfully" });
     } catch (err) {
       res.status(500).json({ error: "Internal Server Error" });
