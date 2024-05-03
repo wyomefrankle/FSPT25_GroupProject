@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import Modal from "./Modal";
 // import { Modal } from "react-bootstrap";
 
@@ -11,6 +11,7 @@ function NewUser() {
   const [password, setPassword] = useState("");
   const [skintype, setSkintype] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,6 +48,7 @@ function NewUser() {
         console.log("User account created successfully:", json);
         setError("");
         alert("Account successfully created! 🌸");
+        navigate("/login");
       })
       .catch((error) => {
         // Handle errors, e.g., show an error message to the user
@@ -61,9 +63,11 @@ function NewUser() {
     setEmail("");
     setSkintype("");
   };
+
   return (
+    
     <div className="App" style={{ width: "30rem" }}>
-      <h1 className="title">Create Account</h1>
+      <h1 style= {{ textShadow: "0 0 5px rgba(255, 255, 255, 0.8)" , color: "#d3783f"}}className="title">Create Account</h1>
       <p className="new-user-message">
         Sign up to save your favorite products!
       </p>
@@ -149,6 +153,7 @@ function NewUser() {
         {error && <p className="error-message">{error}</p>}
       </form>
     </div>
+   
   );
 }
 export default NewUser;
