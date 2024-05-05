@@ -125,15 +125,11 @@ router.get("/favorites", userShouldBeLoggedin, async (req, res) => {
   });
   
   router.post("/favorites", userShouldBeLoggedin, async (req, res) => {
-    const { product_type, brand, name, price, imageURL } = req.body;
-
-    if (imageURL.length > 255) {
-      return res.status(400).json({ error: "Image URL is too long" });
-    } 
+    const { product_type, brand, name, price, productURL } = req.body;
 
     try {
       const results = await db(
-        `INSERT INTO favorites (user_id, product_type, brand, name, price, imageURL) VALUES ("${req.user_id}", "${product_type}", "${brand}", "${name}", "${price}", "${imageURL}")`);
+        `INSERT INTO favorites (user_id, product_type, brand, name, price, productURL) VALUES ("${req.user_id}", "${product_type}", "${brand}", "${name}", "${price}", "${productURL}")`);
 
       if (results.error) {
         throw results.error;

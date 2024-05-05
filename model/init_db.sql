@@ -32,7 +32,7 @@ CREATE TABLE favorites(
     brand VARCHAR(100),
     name VARCHAR(100),
     price DECIMAL(10, 2),
-    imageURL VARCHAR(255),
+    productURL TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
