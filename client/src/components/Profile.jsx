@@ -34,7 +34,7 @@ export default function Profile() {
     return (
         <div>
             <h1>Profile</h1>
-            <Favorites/>
+            {/* <Favorites/> */}
             {data && (
                 <div className="text-center p-4">
         </div>
