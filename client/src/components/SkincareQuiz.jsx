@@ -16,12 +16,28 @@ const SkincareQuiz = ({data}) => {
     const moisturizerImages = ["https://t4.ftcdn.net/jpg/06/49/44/83/360_F_649448391_pnUFms5Im2sZ5rKh168XQjiP0wabz56O.jpg", "https://plus.unsplash.com/premium_photo-1681364365252-387c05c06c40?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww", "https://img.freepik.com/premium-photo/blank-cosmetic-cream-tube-mockup_590726-162.jpg"]
     const tonerImages = ["https://beautymag.com/wp-content/uploads/2020/10/Best-Toners-for-Oily-Skin-scaled.jpg", "https://unblast.com/wp-content/uploads/2021/01/Skin-Care-Bottle-Mockup.jpg", "https://images.unsplash.com/photo-1609097164721-d8b247a6bd6b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHNraW5jYXJlJTIwYm90dGxlfGVufDB8fDB8fHww"]
     const cleanserImages = ["https://images.unsplash.com/photo-1623143445418-40c192fa3d11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2tpbmNhcmUlMjBtb2NrdXB8ZW58MHx8MHx8fDA%3D", "https://images.unsplash.com/photo-1597931752949-98c74b5b159f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww", "https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww"]
-
-    // const [skintype, setSkintype] = useState("");
-
-//   const { username } = useParams(); // Extracting username from URL parameters
-
-  const skintype = data.skintype;
+    const [skintype, setSkintype] = useState(null);
+ 
+const getProfile = async () => {
+  const token = localStorage.getItem("token");
+  try {
+    const response = await fetch("/api/profile", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const json = await response.json();
+      setSkintype(json.skintype);
+      console.log(json.skintype);
+    } else {
+      throw new Error("Failed to fetch profile");
+    }
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+  }
+};
 
   const getSkincareQuiz = async ( skintype, budget, country, skinconcern ) => {
 
@@ -51,11 +67,6 @@ const SkincareQuiz = ({data}) => {
       return []; // Return an empty array in case of an error
     }
   };
-
-  // Call getSkincareQuiz when component mounts
-  // useEffect(() => {
-  //   getSkincareQuiz(skintype, budget, country, skinconcern);
-  // }, []);
 
   const handleBudget = event => {
     setBudget(event.target.value);
@@ -120,6 +131,11 @@ const SkincareQuiz = ({data}) => {
       saveFavorite(product);
       console.log(product);
   };
+
+  useEffect(() => {
+    getProfile();
+  }, );
+
   
   return (
     <div>
