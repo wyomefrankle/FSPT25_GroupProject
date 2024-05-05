@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Picture1 from '../assets/img/Picture1.png';
 // import Modal from "./Modal";
 // import { Modal } from "react-bootstrap";
 
@@ -65,10 +66,21 @@ function NewUser() {
   };
 
   return (
-    
+    <div style={{
+      backgroundImage: `url(${Picture1})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      height: "100vh",
+      width: "100vw",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    }}>
     <div className="App" style={{ width: "30rem" }}>
       <h1 style= {{ textShadow: "0 0 5px rgba(255, 255, 255, 0.8)" , color: "#d3783f"}}className="title">Create Account</h1>
-      <p className="new-user-message">
+      <p style={{ textShadow: "0 0 5px rgba(255, 255, 255, 0.3)"}} className="new-user-message">
         Sign up to save your favorite products!
       </p>
       <form onSubmit={(e) => handleSubmit(e)} className="form">
@@ -83,13 +95,13 @@ function NewUser() {
           />
         </div> */}
         <div>
-          <label className="form-label">First Name:</label>
+          <label  className="form-label">First Name:</label>
           <input
             type="firstname"
             value={firstname}
             onChange={(e) => setFirstname(e.target.value)}
             className="form-control"
-            style={{ width: "40%" }}
+            style={{ width: "40%" , cursor: "pointer"}}
           />
         </div>
         <div>
@@ -99,7 +111,7 @@ function NewUser() {
             value={lastname}
             onChange={(e) => setLastname(e.target.value)}
             className="form-control"
-            style={{ width: "40%" }}
+            style={{ width: "40%" , cursor: "pointer"}}
           />
         </div>
         <div>
@@ -109,7 +121,7 @@ function NewUser() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="form-control-email"
-            style={{ width: "40%" }}
+            style={{ width: "40%" , cursor: "pointer"}}
           />
         </div>
         <div>
@@ -119,7 +131,7 @@ function NewUser() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="form-control"
-            style={{ width: "40%" }}
+            style={{ width: "40%", marginLeft: "15px", cursor: "pointer" }}
           />
         </div>
         <div>
@@ -129,7 +141,7 @@ function NewUser() {
             value={skintype}
             onChange={(e) => setSkintype(e.target.value)}
             className="form-control"
-            style={{ width: "40%" }}
+            style={{ width: "40%", marginLeft: "15px", cursor: "pointer"}}
           />
         </div>
         {/* <Modal
@@ -147,11 +159,19 @@ function NewUser() {
         >
           Submit
         </button> */}
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-button" style={{
+               borderRadius: "5px",
+               padding: "8px 10px", // Adjust padding to maintain button size
+               border: "1px solid #ccc",
+               cursor: "pointer", // Add pointer cursor>
+               marginLeft: "70px",
+              }}
+              >
           Submit
         </button>
         {error && <p className="error-message">{error}</p>}
       </form>
+    </div>
     </div>
    
   );

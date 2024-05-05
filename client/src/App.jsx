@@ -62,7 +62,7 @@ function App() {
       if (response.ok) {
         const json = await response.json();
         setData(json);
-        console.log(json);
+        // console.log(json);
       } else {
         throw new Error("Failed to fetch profile");
       }
