@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import Favorites from "./Favorites";
+
 
 export default function Profile() {
   const [data, setData] = useState(null);
   const [bioInput, setBioInput] = useState("");
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const savedInput = localStorage.getItem("userInput");
@@ -39,8 +42,29 @@ export default function Profile() {
     }
   };
 
+  const getFavorites = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/favorites", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        const json = await response.json();
+        setFavorites(json);
+      } else {
+        throw new Error("Failed to fetch favorites");
+      }
+    } catch (error) {
+      console.error("Error fetching favorites:", error);
+      setFavorites([]);
+    }
+  };
+
   useEffect(() => {
     getProfile();
+    getFavorites(); // Call getFavorites when the component mounts
   }, []);
 
   return (
@@ -74,6 +98,7 @@ export default function Profile() {
           />
         </div>
       </div>
+      <Favorites favorites={favorites} setFavorites={setFavorites}/>
     </div>
   );
 }

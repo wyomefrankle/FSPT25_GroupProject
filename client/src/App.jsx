@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./components/Home";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
+import SkincareQuiz from "./components/SkincareQuiz";
 import NewUser from "./components/NewUser";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
@@ -56,6 +57,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/try-it" element={<SkincareQuiz />} />
           <Route path="/new-user" element={<NewUser />} />
           <Route path="/login" element={<Login />} />
           <Route
