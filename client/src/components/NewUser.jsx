@@ -65,10 +65,20 @@ function NewUser() {
   };
 
   return (
-    
     <div className="App" style={{ width: "30rem" }}>
-      <h1 style= {{ textShadow: "0 0 5px rgba(255, 255, 255, 0.8)" , color: "#d3783f"}}className="title">Create Account</h1>
-      <p className="new-user-message">
+      <h1
+        style={{
+          textShadow: "0 0 5px rgba(255, 255, 255, 0.8)",
+          color: "#d3783f",
+        }}
+        className="title"
+      >
+        Create Account
+      </h1>
+      <p
+        style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }}
+        className="new-user-message"
+      >
         Sign up to save your favorite products!
       </p>
       <form onSubmit={(e) => handleSubmit(e)} className="form">
@@ -83,7 +93,12 @@ function NewUser() {
           />
         </div> */}
         <div>
-          <label className="form-label">First Name:</label>
+          <label
+            style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }}
+            className="form-label"
+          >
+            First Name:
+          </label>
           <input
             type="firstname"
             value={firstname}
@@ -93,7 +108,12 @@ function NewUser() {
           />
         </div>
         <div>
-          <label className="form-label">Last Name:</label>
+          <label
+            style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }}
+            className="form-label"
+          >
+            Last Name:
+          </label>
           <input
             type="lastname"
             value={lastname}
@@ -103,7 +123,12 @@ function NewUser() {
           />
         </div>
         <div>
-          <label className="form-label">Email:</label>
+          <label
+            style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }}
+            className="form-label"
+          >
+            Email:
+          </label>
           <input
             type="email"
             value={email}
@@ -113,7 +138,12 @@ function NewUser() {
           />
         </div>
         <div>
-          <label className="form-label">Password:</label>
+          <label
+            style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }}
+            className="form-label"
+          >
+            Password:
+          </label>
           <input
             type="password"
             value={password}
@@ -123,7 +153,12 @@ function NewUser() {
           />
         </div>
         <div>
-          <label className="form-label">Skin Type:</label>
+          <label
+            style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }}
+            className="form-label"
+          >
+            Skin Type:
+          </label>
           <input
             type="skintype"
             value={skintype}
@@ -153,7 +188,6 @@ function NewUser() {
         {error && <p className="error-message">{error}</p>}
       </form>
     </div>
-   
   );
 }
 export default NewUser;
