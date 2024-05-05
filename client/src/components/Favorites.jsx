@@ -44,7 +44,7 @@ function Favorites({ favorites, setFavorites }) {
               </p>
               </div>
               <div className="ingredient-amount-label-secondary">
-                <button onClick={() => deleteFavorite(favorite.id)}>Delete</button>
+                <button onClick={() => deleteFavorite(favorite.id)} type="button" className="btn btn-light">Delete</button>
               </div>
             </div>
           </div>
