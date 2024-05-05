@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
@@ -36,11 +35,14 @@ function Favorites({ favorites, setFavorites }) {
             <br />
             <div className="image-label-container">
               <div>
+              <p>
                 <a href={favorite.productURL} target="_blank" rel="noopener noreferrer">
-                  <img className="recipe-image" src={favorite.productURL} alt={favorite.name} />
+                  {favorite.name}
                 </a>
+                {" "}
+                by {favorite.brand}
+              </p>
               </div>
-              <p className="recipe-headline">{favorite.name} by {favorite.brand}</p>
               <div className="ingredient-amount-label-secondary">
                 <button onClick={() => deleteFavorite(favorite.id)}>Delete</button>
               </div>

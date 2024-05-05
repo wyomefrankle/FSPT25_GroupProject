@@ -4,7 +4,7 @@ import SaveFavoriteModal from "./SaveFavoriteModal";
 
 // import './App.css';
 
-const SkincareQuiz = () => {
+const SkincareQuiz = ({data}) => {
   
   const [budget, setBudget] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,9 +21,7 @@ const SkincareQuiz = () => {
 
 //   const { username } = useParams(); // Extracting username from URL parameters
 
-  const skintype = [ //list of all possible skin concerns
-  'Dry'
-];
+  const skintype = data.skintype;
 
   const getSkincareQuiz = async ( skintype, budget, country, skinconcern ) => {
 
