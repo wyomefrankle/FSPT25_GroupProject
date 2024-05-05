@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import Favorites from "./Favorites";
 
 
-export default function Profile() {
-  const [data, setData] = useState(null);
+export default function Profile({data, favorites, setFavorites}) {
   const [bioInput, setBioInput] = useState("");
-  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const savedInput = localStorage.getItem("userInput");
@@ -19,53 +17,6 @@ export default function Profile() {
     setBioInput(value);
     localStorage.setItem("userInput", value);
   };
-
-  const getProfile = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const response = await fetch("/api/profile", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        const json = await response.json();
-        setData(json);
-        console.log(json);
-      } else {
-        throw new Error("Failed to fetch profile");
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-      setData(null);
-    }
-  };
-
-  const getFavorites = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("/api/favorites", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        const json = await response.json();
-        setFavorites(json);
-      } else {
-        throw new Error("Failed to fetch favorites");
-      }
-    } catch (error) {
-      console.error("Error fetching favorites:", error);
-      setFavorites([]);
-    }
-  };
-
-  useEffect(() => {
-    getProfile();
-    getFavorites(); // Call getFavorites when the component mounts
-  }, []);
 
   return (
     <div>
