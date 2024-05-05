@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Picture1 from '../assets/img/Picture1.png';
 
 
 export default function Profile() {
@@ -32,7 +33,18 @@ export default function Profile() {
     }, []);
 
     return (
-        <div>
+        <div style={{
+            backgroundImage: `url(${Picture1})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            height: "100vh",
+            width: "100vw",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
             <h1>Profile</h1>
             {data && (
                 <div className="text-center p-4">

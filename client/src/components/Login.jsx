@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddContext from '../Context/AddContext';
-import { useLocation } from 'react-router-dom';
+import Picture1 from '../assets/img/Picture1.png';
 
 
 
@@ -46,9 +46,21 @@ function Login() {
 
 
     return (
-      <div>
-          <h1 style= {{ textShadow: "0 0 5px rgba(255, 255, 255, 0.8)" , color: "#d3783f"}}>SKINFINITY</h1>
-          <p style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }} className="about-description" >
+      <div style={{
+        backgroundImage: `url(${Picture1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}>
+        
+          <h1 style= {{ textShadow: "0 0 10px rgba(255, 255, 255, 0.8)" , color: "#d3783f"}}>SKINFINITY</h1>
+          <p style={{ textShadow: "0 0 8px rgba(0, 0, 0, 1)" }} className="about-description" >
         Welcome to Skinfinity! Our mission is to take the guesswork out of your skincare routine to truly unlock your skin's infinite potential.
       </p>
           <div>
@@ -59,6 +71,7 @@ function Login() {
               type="text"
               className="form-control mb-2"
               placeholder="Email"
+              style={{ borderRadius: "5px", padding: "10px", border: "1px solid #ccc", width: "120px" }}
             />
             <input
               value={password}
@@ -67,18 +80,38 @@ function Login() {
               type="password"
               className="form-control mb-2"
               placeholder="Password"
+              style={{ borderRadius: "5px", padding: "10px", border: "1px solid #ccc", width: "120px" }}
             />
             <div className="d-flex gap-2 justify-content-center">
-              <button className="btn btn-primary" onClick={handleLogin}>
+              <button className="btn btn-primary" onClick={handleLogin} style={{
+               borderRadius: "5px",
+               padding: "5px 10px", // Adjust padding to maintain button size
+               border: "1px solid #ccc",
+               cursor: "pointer", // Add pointer cursor>
+               marginRight: "0.9px"
+              }}
+              >
                 Log in
               </button>
-              <button className="btn btn-outline-dark ml-2" onClick={handleLogout}>
+              <button className="btn btn-outline-dark ml-2" onClick={handleLogout} style={{
+               borderRadius: "5px",
+               padding: "5px 10px", // Adjust padding to maintain button size
+               border: "1px solid #ccc",
+               cursor: "pointer" // Add pointer cursor>
+              }}
+              > 
                 Log out
               </button>
             </div>
             <div className="mt-3 text-center">
               <p style= {{ textShadow: "0 0 10px rgba(0, 0, 0, 1)", fontWeight: "bold"}}>Don't have an Account?</p>
-              <button className="btn btn outline-dark" onClick = {() => navigate("/new-user")}>
+              <button className="btn btn outline-dark" onClick = {() => navigate("/new-user")} style={{
+               borderRadius: "5px",
+               padding: "5px 10px", // Adjust padding to maintain button size
+               border: "1px solid #ccc",
+               cursor: "pointer" // Add pointer cursor>
+              }}
+              >
                 Create new Account
               </button>
             </div>
