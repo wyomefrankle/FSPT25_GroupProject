@@ -94,13 +94,16 @@ const SkincareQuiz = () => {
 
   const saveFavorite = async (product) => { 
     try {
+      const token = localStorage.getItem("token");
         const response = await fetch(`http://localhost:4000/api/favorites`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`,
+
             },
-            body: JSON.stringify({ product }) 
-        });
+            body: JSON.stringify(product)
+      });
   
         if (!response.ok) {
             throw new Error(`Failed to save favorite product: ${response.statusText}`);

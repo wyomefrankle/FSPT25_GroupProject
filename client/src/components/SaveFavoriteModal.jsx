@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 export default function saveFavoriteModal({ launchBtnText, modalTitle, recommendation, handleSaveFavorite }) {
+
+  const handleClick = () => {
+    handleSaveFavorite(recommendation);
+  };
+  
   return (
     <div className="m-3">
       <button
@@ -9,7 +14,7 @@ export default function saveFavoriteModal({ launchBtnText, modalTitle, recommend
         className="save-recipe"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
-        onClick={() => handleSaveFavorite(recommendation)}
+        onClick={handleClick}
       >
         {launchBtnText}
       </button>

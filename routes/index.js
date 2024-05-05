@@ -127,9 +127,9 @@ router.get("/favorites", userShouldBeLoggedin, async (req, res) => {
   router.post("/favorites", userShouldBeLoggedin, async (req, res) => {
     const { product_type, brand, name, price, imageURL } = req.body;
 
-    if (imageURL.length > 255) {
-      return res.status(400).json({ error: "Image URL is too long" });
-    } 
+    // if (imageURL.length > 255) {
+    //   return res.status(400).json({ error: "Image URL is too long" });
+    // } 
 
     try {
       const results = await db(
