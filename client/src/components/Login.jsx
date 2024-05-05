@@ -93,7 +93,7 @@ function Login() {
               >
                 Log in
               </button>
-              <button className="btn btn-outline-dark ml-2" onClick={handleLogout} style={{
+              <button className="btn btn-light" onClick={handleLogout} style={{
                borderRadius: "5px",
                padding: "5px 10px", // Adjust padding to maintain button size
                border: "1px solid #ccc",
@@ -105,7 +105,7 @@ function Login() {
             </div>
             <div className="mt-3 text-center">
               <p style= {{ textShadow: "0 0 10px rgba(0, 0, 0, 1)", fontWeight: "bold"}}>Don't have an Account?</p>
-              <button className="btn btn outline-dark" onClick = {() => navigate("/new-user")} style={{
+              <button className="btn btn-light" onClick = {() => navigate("/new-user")} style={{
                borderRadius: "5px",
                padding: "5px 10px", // Adjust padding to maintain button size
                border: "1px solid #ccc",

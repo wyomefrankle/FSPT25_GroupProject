@@ -187,18 +187,14 @@ const getProfile = async () => {
         )}
         {loading && <p>Loading...</p>}
       </div>
-    <form onSubmit={e => handleSubmit(e)} className="form">
-      <label className="label">
-        Budget:
-        <input
-          onChange={e => handleBudget(e)}
-          value={budget}
-          className="input"
-        />
-      </label>
+    <form onSubmit={e => handleSubmit(e)}>
+        <div className="form-group">
+        <label className="form-label">Budget: </label>
+        <input type="text" className="form-control" onChange={e => handleBudget(e)} value={budget}/>
+        </div>
       <div className="form-group">
         <label className="form-label">Country:</label>
-        <select className="form-control" value={country} onChange={handleCountry} style={{ width: '40%' }}>
+        <select className="form-control" value={country} onChange={handleCountry}>
           <option value="the US">United States</option>
           <option value="the UK">United Kingdom</option>
           <option value="Spain">Spain</option>
@@ -210,7 +206,7 @@ const getProfile = async () => {
       </div>
       <div className="form-group">
         <label className="form-label">Skin Concern:</label>
-        <select className="form-control" value={skinconcern} onChange={handleSkinconcern} style={{ width: '40%' }}>
+        <select className="form-control" value={skinconcern} onChange={handleSkinconcern}>
           <option value="Dryness">Dryness</option>
           <option value="Acne">Acne</option>
           <option value="Large pores">Large pores</option>
@@ -220,7 +216,7 @@ const getProfile = async () => {
 
         </select>
       </div>
-      <button type="submit" className="submit-button">
+      <button type="submit" className="btn btn-light">
         Submit
       </button>
     </form>
