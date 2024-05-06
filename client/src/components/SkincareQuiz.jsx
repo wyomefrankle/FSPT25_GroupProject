@@ -4,7 +4,7 @@ import SaveFavoriteModal from "./SaveFavoriteModal";
 
 // import './App.css';
 
-const SkincareQuiz = ({data}) => {
+const SkincareQuiz = () => {
   
   const [budget, setBudget] = useState("");
   const [loading, setLoading] = useState(false);
