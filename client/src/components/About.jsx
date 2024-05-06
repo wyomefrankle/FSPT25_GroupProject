@@ -16,7 +16,7 @@ const About = () => {
       justifyContent: "center",
       alignItems: "center",
     }}>
-    <h2 style= {{ textShadow: "0 0 10px rgba(0, 0, 0, 1)" }}>SKINFINITY</h2>
+    <h2 style= {{ textShadow: "0 0 5px rgba(255, 255, 255, 0.8)" , color: "#d3783f" }}>SKINFINITY</h2>
     <div className="about-section">
       <h2 className="about-title">
       <Link to="/login">About Us!</Link>
