@@ -63,62 +63,37 @@ function Login() {
           <p style={{ textShadow: "0 0 8px rgba(0, 0, 0, 1)" }} className="about-description" >
         Welcome to Skinfinity! Our mission is to take the guesswork out of your skincare routine to truly unlock your skin's infinite potential.
       </p>
-          <div>
+          <div className="input-container">
             <input
               value={email}
               onChange={handleChange}
               name="email"
               type="text"
-              className="form-control mb-2"
+              className="form-control mb-2 email-input"
               placeholder="Email"
-              style={{ borderRadius: "5px", padding: "10px", border: "1px solid #ccc", width: "120px" }}
+              // style={{ borderRadius: "5px", padding: "10px", border: "1px solid #ccc", width: "120px" }}
             />
             <input
               value={password}
               onChange={handleChange}
               name="password"
               type="password"
-              className="form-control mb-2"
+              className="form-control mb-2 password-input"
               placeholder="Password"
-              style={{ borderRadius: "5px", padding: "10px", border: "1px solid #ccc", width: "120px" }}
+              // style={{ borderRadius: "5px", padding: "10px", border: "1px solid #ccc", width: "120px" }}
             />
-            <div className="d-flex gap-2 justify-content-center">
-              <button className="btn btn-primary" onClick={handleLogin} style={{
-               borderRadius: "5px",
-               padding: "5px 10px", // Adjust padding to maintain button size
-               border: "1px solid #ccc",
-               cursor: "pointer", // Add pointer cursor>
-               marginRight: "0.9px"
-              }}
-              >
-                Log in
-              </button>
-              <button className="btn btn-light" onClick={handleLogout} style={{
-               borderRadius: "5px",
-               padding: "5px 10px", // Adjust padding to maintain button size
-               border: "1px solid #ccc",
-               cursor: "pointer" // Add pointer cursor>
-              }}
-              > 
-                Log out
-              </button>
+            </div>
+             <div className="login-container">
+             <button className="btn btn-primary" onClick={handleLogin}>Log in</button>
+            <button className="btn btn-light" onClick={handleLogout}>Log out</button>
             </div>
             <div className="mt-3 text-center">
-              <p style= {{ textShadow: "0 0 10px rgba(0, 0, 0, 1)", fontWeight: "bold"}}>Don't have an Account?</p>
-              <button className="btn btn-light" onClick = {() => navigate("/new-user")} style={{
-               borderRadius: "5px",
-               padding: "5px 10px", // Adjust padding to maintain button size
-               border: "1px solid #ccc",
-               cursor: "pointer" // Add pointer cursor>
-              }}
-              >
-                Create new Account
-              </button>
-            </div>
-          </div>
-        </div>
+            <p style={{ textShadow: "0 0 10px rgba(0, 0, 0, 1)", color: "#f6eee9", fontWeight: "bold" }}>Don't have an Account?</p>
+            <button className="btn btn-light btn-create-account" onClick={() => navigate("/new-user")}>Create new Account</button>
+         </div>
+       </div>
+
       );
-    }
-  
+     }
  
 export default Login;

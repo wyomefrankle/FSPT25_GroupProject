@@ -82,7 +82,7 @@ export default function Profile() {
       justifyContent: "center",
       alignItems: "center",
     }}>
-      <h1>Profile</h1>
+      {/* <h1>Profile</h1> */}
       {data && (
         <div className="text-center p-4">
           <div>
