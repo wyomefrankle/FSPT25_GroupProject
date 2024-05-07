@@ -70,22 +70,23 @@ export default function Profile() {
   }, []);
 
   return (
-    <div style={{
+    <div className="container" style={{
       backgroundImage: `url(${Picture1})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       height: "100vh",
       width: "100vw",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
+      // display: "flex",
+      // flexDirection: "column",
+      // justifyContent: "center",
+      // alignItems: "center",
     }}>
       {/* <h1>Profile</h1> */}
       {data && (
         <div className="text-center p-4">
-          <div>
+          <br/>
+          <div className='row'>
             <p>Name: {data.firstname}</p>
             <p>My Skin Type: {data.skintype}</p>
           </div>
