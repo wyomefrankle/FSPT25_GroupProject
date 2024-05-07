@@ -7,6 +7,11 @@ export default function Profile() {
   const [bioInput, setBioInput] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [data, setData] = useState(null);
+  const [filterCriteria, setFilterCriteria] = useState({
+    price: "",
+    brand: "",
+    product_type: ""
+  });
 
   useEffect(() => {
     const savedInput = localStorage.getItem("userInput");
@@ -69,47 +74,110 @@ export default function Profile() {
     getFavorites(); // Call getFavorites when the component mounts
   }, []);
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilterCriteria({ ...filterCriteria, [name]: value });
+  };
+
+  const filteredFavorites = favorites.filter(favorite => {
+    return (
+      (filterCriteria.price === "" || favorite.price === filterCriteria.price) &&
+      (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
+      (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type)
+    );
+  });
+
   return (
-    <div className="container" style={{
+    <div className="container-fluid" style={{
       backgroundImage: `url(${Picture1})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       height: "100vh",
-      width: "100vw",
-      // display: "flex",
-      // flexDirection: "column",
-      // justifyContent: "center",
-      // alignItems: "center",
+      width: "100vw"
     }}>
-      {/* <h1>Profile</h1> */}
       {data && (
-        <div className="text-center p-4">
-          <br/>
-          <div className='row'>
-            <p>Name: {data.firstname}</p>
-            <p>My Skin Type: {data.skintype}</p>
-          </div>
-
-          <div className="user-bio">
-            <div>
-              <h3>🍊 User Bio 🍊</h3>
-              <form>
-                <p>
-                  Followers: 0 <br />Following: 0
-                </p>
-                <p>🌍 Location: </p>
-              </form>
-              <textarea
-                value={bioInput}
-                onChange={handleChange}
-                placeholder="Tell us about yourself!"
-                rows="5"
-                cols="33"
-              />
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <br/>
+            <br/>
+            <div className="card bg-light">
+              <div className="card-body text-center">
+                <h2 className="card-title">Profile</h2>
+                <div className="row">
+                  <div className="col">
+                    <p><strong>Name:</strong> {data.firstname}</p>
+                    <p><strong>My Skin Type:</strong> {data.skintype}</p>
+                  </div>
+                </div>
+                <div className="user-bio">
+                  <h3 className="mt-4">🍊 User Bio 🍊</h3>
+                  <form>
+                    <p>
+                      <strong>Followers:</strong> 0 <br /><strong>Following:</strong> 0
+                    </p>
+                    <p><strong>Location:</strong></p>
+                  </form>
+                  <textarea
+                    value={bioInput}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Tell us about yourself!"
+                    rows="5"
+                  />
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div className="card bg-light">
+              <div className="card-body text-center">
+                <h2 className="card-title">Favorites</h2>
+                <div className="form-group">
+                  <label htmlFor="priceFilter">Price:</label>
+                  <select
+                    className="form-control"
+                    id="priceFilter"
+                    name="price"
+                    value={filterCriteria.price}
+                    onChange={handleFilterChange}
+                  >
+                    <option value="">All</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="brandFilter">Brand:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="brandFilter"
+                    name="brand"
+                    value={filterCriteria.brand}
+                    onChange={handleFilterChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="productTypeFilter">Product Type:</label>
+                  <select
+                    className="form-control"
+                    id="productTypeFilter"
+                    name="product_type"
+                    value={filterCriteria.product_type}
+                    onChange={handleFilterChange}
+                  >
+                    <option value="">All</option>
+                    <option value="Cleanser">Cleanser</option>
+                    <option value="Toner">Toner</option>
+                    <option value="Serum">Serum</option>
+                    <option value="Moisturizer">Moisturizer</option>
+                  </select>
+                </div>
+                <Favorites favorites={filteredFavorites} setFavorites={setFavorites} />
+              </div>
             </div>
           </div>
-          <Favorites favorites={favorites} setFavorites={setFavorites} />
         </div>
       )}
     </div>
