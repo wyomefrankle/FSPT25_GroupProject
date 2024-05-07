@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom"; 
 import SaveFavoriteModal from "./SaveFavoriteModal";
+import Picture1 from '../assets/img/Picture1.png';
 
 // import './App.css';
 
@@ -138,7 +139,18 @@ const getProfile = async () => {
 
   
   return (
-    <div>
+    <div style={{
+      backgroundImage: `url(${Picture1})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      height: "100vh",
+      width: "100vw",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    }}>
       <div className="container">
         {!loading && (
           <div>
@@ -187,6 +199,7 @@ const getProfile = async () => {
         )}
         {loading && <p>Loading...</p>}
       </div>
+      <h3 className="custom-title">Enter the Skinfinity Realm!</h3>
     <form onSubmit={e => handleSubmit(e)}>
         <div className="form-group">
         <label className="form-label">Budget: </label>
@@ -194,7 +207,7 @@ const getProfile = async () => {
         </div>
       <div className="form-group">
         <label className="form-label">Country:</label>
-        <select className="form-control" value={country} onChange={handleCountry}>
+        <select className="form-control" style={{textAlign: "center"}} value={country} onChange={handleCountry}>
           <option value="the US">United States</option>
           <option value="the UK">United Kingdom</option>
           <option value="Spain">Spain</option>
@@ -206,7 +219,7 @@ const getProfile = async () => {
       </div>
       <div className="form-group">
         <label className="form-label">Skin Concern:</label>
-        <select className="form-control" value={skinconcern} onChange={handleSkinconcern}>
+        <select className="form-control" style={{textAlign: "center"}} value={skinconcern} onChange={handleSkinconcern}>
           <option value="Dryness">Dryness</option>
           <option value="Acne">Acne</option>
           <option value="Large pores">Large pores</option>
@@ -216,7 +229,7 @@ const getProfile = async () => {
 
         </select>
       </div>
-      <button type="submit" className="btn btn-light">
+      <button type="submit" className="btn btn-light submit-button">
         Submit
       </button>
     </form>

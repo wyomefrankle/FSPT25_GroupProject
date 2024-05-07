@@ -80,7 +80,7 @@ function NewUser() {
     }}>
     <div className="App" style={{ width: "30rem" }}>
       <h1 style= {{ textShadow: "0 0 5px rgba(255, 255, 255, 0.8)" , color: "#d3783f"}}className="title">Create Account</h1>
-      <p style={{ textShadow: "0 0 5px rgba(255, 255, 255, 0.3)"}} className="new-user-message">
+      <p  className="new-user-message">
         Sign up to save your favorite products!
       </p>
       <form onSubmit={(e) => handleSubmit(e)} className="form">
@@ -94,54 +94,54 @@ function NewUser() {
             style={{ width: "40%" }}
           />
         </div> */}
-        <div>
+        <div className="form-group">
           <label  className="form-label">First Name:</label>
           <input
             type="firstname"
             value={firstname}
             onChange={(e) => setFirstname(e.target.value)}
             className="form-control"
-            style={{ width: "40%" , cursor: "pointer"}}
+            // style={{ width: "40%" , cursor: "pointer"}}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label className="form-label">Last Name:</label>
           <input
             type="lastname"
             value={lastname}
             onChange={(e) => setLastname(e.target.value)}
             className="form-control"
-            style={{ width: "40%" , cursor: "pointer"}}
+            // style={{ width: "40%" , cursor: "pointer"}}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label className="form-label">Email:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="form-control-email"
-            style={{ width: "40%" , cursor: "pointer"}}
+            className="form-control"
+            // style={{ width: "40%" , cursor: "pointer"}}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label className="form-label">Password:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="form-control"
-            style={{ width: "40%", marginLeft: "15px", cursor: "pointer" }}
+            // style={{ width: "40%", marginLeft: "15px", cursor: "pointer" }}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label className="form-label">Skin Type:</label>
           <input
             type="skintype"
             value={skintype}
             onChange={(e) => setSkintype(e.target.value)}
             className="form-control"
-            style={{ width: "40%", marginLeft: "15px", cursor: "pointer"}}
+            // style={{ width: "40%", marginLeft: "15px", cursor: "pointer"}}
           />
         </div>
         {/* <Modal
@@ -164,7 +164,8 @@ function NewUser() {
                padding: "8px 10px", // Adjust padding to maintain button size
                border: "1px solid #ccc",
                cursor: "pointer", // Add pointer cursor>
-               marginLeft: "70px",
+               marginLeft: "25px",
+               marginTop: "10px",
               }}
               >
           Submit
