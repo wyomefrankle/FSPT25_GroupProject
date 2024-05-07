@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom"; 
 import SaveFavoriteModal from "./SaveFavoriteModal";
 import Picture1 from '../assets/img/Picture1.png';
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 // import './App.css';
 
-const SkincareQuiz = ({data}) => {
+const SkincareQuiz = () => {
   
   const [budget, setBudget] = useState("");
   const [loading, setLoading] = useState(false);
     const [country, setCountry] = useState("");
-    const [skinconcern, setSkinconcern] = useState("");
+    const [skinconcern, setSkinconcern] = useState("Dryness");
     const [skincareRecommendations, setSkincareRecommendations] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const serumImages = ["https://5.imimg.com/data5/RN/QW/LK/SELLER-3074232/face-serum.jpg", "https://plus.unsplash.com/premium_photo-1669735916387-24340468a65c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNlcnVtJTIwYm90dGxlfGVufDB8fDB8fHww", "https://images.unsplash.com/photo-1608571424266-edeb9bbefdec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTc1fHxza2luY2FyZXxlbnwwfHwwfHx8MA%3D%3D"]
@@ -81,7 +84,9 @@ const getProfile = async () => {
     setSkinconcern(event.target.value)
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = event =>
+
+ {
     event.preventDefault();
     setLoading(true);
     getSkincareQuiz(skintype, budget, country, skinconcern);
@@ -139,103 +144,127 @@ const getProfile = async () => {
 
   
   return (
-    <div style={{
+    <div 
+    style={{
       backgroundImage: `url(${Picture1})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       height: "100vh",
       width: "100vw",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
-      <div className="container">
+      // // display: "flex",
+      // flexDirection: "column",
+      // justifyContent: "center",
+      // alignItems: "center",
+    }}
+    >
+      <div className="container" >
         {!loading && (
           <div>
-            {skincareRecommendations.length > 0 && (
-              Object.entries(
-                skincareRecommendations.reduce((acc, recommendation) => {
-                  acc[recommendation.product_type] = acc[recommendation.product_type] || [];
-                  acc[recommendation.product_type].push(recommendation);
-                  return acc;
-                }, {})
-              ).map(([productType, recommendations], index) => (
-                <div key={index}>
-                  <h3 className="card-title">{productType}</h3>
-                  <div className="row">
-                    {recommendations.map((recommendation, recIndex) => (
-                      <div className="col-md-4 col-sm-6" key={recommendation.id}>
-                        <div className="card">
-                          <img 
-                            src={getProductImage(productType, recIndex)} 
-                            alt={recommendation.name} 
-                            className="img-fluid" 
-                          />
-                          <strong className="card-text">Product:</strong> {recommendation.name}, {recommendation.brand}
-                          <br />
-                          <strong className="card-text">Price:</strong> {recommendation.price}
-                          <a 
-                            href={recommendation.productURL} 
-                            target="_blank" 
-                            rel="noopener noreferrer">
-                            <strong className='card-text'>Product URL</strong>
-                          </a>
-                          <SaveFavoriteModal
-                      launchBtnText="Save Favorite"
-                      modalTitle="Product saved to favorites! 🛒"
-                      recommendation={recommendation}
-                      handleSaveFavorite={handleSaveFavorite}
-                    />
-                        </div>
+            <br/>
+            <br/>
+            <br/>
+            {skincareRecommendations.length > 0 && 
+            (Object.entries(
+              skincareRecommendations.reduce((acc, recommendation) => {
+                acc[recommendation.product_type] = acc[recommendation.product_type] || [];
+                acc[recommendation.product_type].push(recommendation);
+                return acc;
+              }, {})
+            ).map(([productType, recommendations], index) => (
+              <div key={index}>
+                <h2 className="card-title">{productType}</h2>
+                <div className="row">
+                  {recommendations.map((recommendation, recIndex) => (
+                    <div className="col-md-4 col-sm-6 mb-4" key={recommendation.id}>
+                    <div className="card h-100">
+                      <img 
+                        src={getProductImage(productType, recIndex)} 
+                        alt={recommendation.name} 
+                        className="card-img-top" 
+                        style={{ height: '250px', objectFit: 'cover' }} 
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{recommendation.name}</h5>
+                        <a 
+                          href={recommendation.productURL} 
+                          className="btn btn-primary" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          {recommendation.brand}
+                        </a>
+                        <p className="card-text">{recommendation.price}</p>
+                        <SaveFavoriteModal
+                          launchBtnText="Save Favorite"
+                          modalTitle="Product saved to favorites! 🛒"
+                          recommendation={recommendation}
+                          handleSaveFavorite={handleSaveFavorite}
+                        />
                       </div>
-                    ))}
+                    </div>
                   </div>
+                  ))}
                 </div>
-              ))
+              </div>
+            ))
             )}
           </div>
         )}
-        {loading && <p>Loading...</p>}
-      </div>
-      <h3 className="custom-title">Enter the Skinfinity Realm!</h3>
-    <form onSubmit={e => handleSubmit(e)}>
-        <div className="form-group">
-        <label className="form-label">Budget: </label>
-        <input type="text" className="form-control" onChange={e => handleBudget(e)} value={budget}/>
-        </div>
-      <div className="form-group">
-        <label className="form-label">Country:</label>
-        <select className="form-control" style={{textAlign: "center"}} value={country} onChange={handleCountry}>
-          <option value="the US">United States</option>
-          <option value="the UK">United Kingdom</option>
-          <option value="Spain">Spain</option>
-          <option value="Norway">Norway</option>
-          <option value="Canada">Canada</option>
-          <option value="South Africa">South Africa</option>
-          <option value="the Netherlands">Netherlands</option>
-        </select>
-      </div>
-      <div className="form-group">
-        <label className="form-label">Skin Concern:</label>
-        <select className="form-control" style={{textAlign: "center"}} value={skinconcern} onChange={handleSkinconcern}>
-          <option value="Dryness">Dryness</option>
-          <option value="Acne">Acne</option>
-          <option value="Large pores">Large pores</option>
-          <option value="Aging">Aging</option>
-          <option value="Hyperpigmentation">Hyperpigmentation</option>
-          <option value="Redness">Redness</option>
 
-        </select>
       </div>
-      <button type="submit" className="btn btn-light submit-button">
-        Submit
-      </button>
-    </form>
+      <br/>
+      <br/>
+      <h3 className="custom-title">Enter the Skinfinity Realm!</h3>
+      {loading ? (
+          <div>
+            <p>Loading...</p>
+            <div className="loader-container">
+              <ClipLoader color={'#fff'} size={150} />
+            </div>
+          </div>
+        ) : (
+          <div className="container" style = {{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "50vw"}}>
+      <form onSubmit={e => handleSubmit(e)}>
+      <div className="form-group">
+      <label className="form-label">Budget: </label>
+      <input type="text" className="form-control" onChange={e => handleBudget(e)} value={budget}/>
+      </div>
+    <div className="form-group">
+      <label className="form-label">Country:</label>
+      <CountryDropdown
+      value={country}
+      onChange={(val) => setCountry(val)} 
+      className="form-control"/>
+    </div>
+    <div className="form-group">
+      <label className="form-label">Skin Concern:</label>
+      <select className="form-control" style={{textAlign: "center"}} value={skinconcern} onChange={handleSkinconcern}>
+        <option value="Dryness">Dryness</option>
+        <option value="Acne">Acne</option>
+        <option value="Large pores">Large pores</option>
+        <option value="
+
+Aging">Aging</option>
+        <option value="Hyperpigmentation">Hyperpigmentation</option>
+        <option value="Redness">Redness</option>
+
+      </select>
+    </div>
+    <br/>
+    <button type="submit" className="btn btn-light">
+      Submit
+    </button>
+  </form>
+    </div>
+    )}
   </div>
   );
 };
 
 export default SkincareQuiz;
-
