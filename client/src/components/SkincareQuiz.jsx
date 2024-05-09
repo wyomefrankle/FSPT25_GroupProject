@@ -8,6 +8,7 @@ import {
   CountryRegionData,
 } from "react-country-region-selector";
 import ClipLoader from "react-spinners/ClipLoader";
+import RecentSearches from "./RecentSearches";
 
 // import './App.css';
 
@@ -106,6 +107,13 @@ const SkincareQuiz = () => {
     event.preventDefault();
     setLoading(true);
     getSkincareQuiz(skintype, budget, country, skinconcern);
+
+    // Save recent searches to localStorage
+    const recentSearch = { budget, country, skinconcern };
+    const recentSearches =
+      JSON.parse(localStorage.getItem("recentSearches")) || [];
+    recentSearches.push(recentSearch);
+    localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   };
 
   function getProductImage(productType, index) {
@@ -300,6 +308,8 @@ Aging"
           </form>
         </div>
       )}
+
+      <RecentSearches />
     </div>
   );
 };

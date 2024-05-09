@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const RecentSearches = () => {
-  const [recentSearches, setRecentSearches] = useState([]);
+  // Get recent searches from localStorage
+  const recentSearches =
+    JSON.parse(localStorage.getItem("recentSearches")) || [];
 
-  useEffect(() => {
-    const storedSearches = localStorage.getItem("recentSearches");
-    if (storedSearches) {
-      setRecentSearches(JSON.parse(storedSearches));
-    }
-  }, []);
-
-  const handleSearchClick = (search) => {
-    setRecentSearches([search, ...recentSearches.slice(0, 2)]);
-
-    localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  };
+  // Render recent searches
 
   return (
     <div>
-      <h2>Recently Searched:</h2>
+      <h4>Recently Searched: 🔎</h4>
       <ul>
-        {recentSearches.map((search, index) => (
-          <li key={index} onClick={() => handleSearchClick(search)}>
-            {search}
+        {recentSearches.slice(-3).map((search, index) => (
+          <li key={index}>
+            <p>Budget: {search.budget}</p>
+            <p>Country: {search.country}</p>
+            <p>Skin Concern: {search.skinconcern}</p>
           </li>
         ))}
       </ul>
