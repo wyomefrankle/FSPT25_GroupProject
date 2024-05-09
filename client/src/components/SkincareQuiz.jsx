@@ -312,7 +312,7 @@ Aging"
         </div>
       )}
 
-      {formSubmitted && <RecentSearches />}
+      {formSubmitted && !loading && <RecentSearches />}
     </div>
   );
 };
