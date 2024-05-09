@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Picture1 from '../assets/img/Picture1.png';
+import Picture2 from '../assets/img/Picture2.jpg';
 
 const About = () => {
   return (
@@ -25,8 +26,12 @@ const About = () => {
         Skinfinity is a project designed and developed by Wyome Frankle, Joselin
         Pineda, and Meg Chary.
       </p>
+    <div className= "pictures">
+      <img src= {Picture2} alt="Picture 2" style ={{ borderRadius: "50%", width:"120px", height: "120px" }}/>
     </div>
     </div>
+    </div>
+   
   );
 };
 
