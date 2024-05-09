@@ -28,7 +28,7 @@ function Favorites({ favorites, setFavorites }) {
 
   return (
     <div>
-      <h1> Favorites </h1>
+      <h2> Favorites </h2>
       <div className="recipe-catalog">
         {favorites.map(favorite => (
           <div key={favorite.id} className="recipe-card">
