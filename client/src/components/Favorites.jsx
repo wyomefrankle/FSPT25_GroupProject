@@ -28,25 +28,19 @@ function Favorites({ favorites, setFavorites }) {
 
   return (
     <div>
-      <h1> Favorites </h1>
-      <div className="recipe-catalog">
+      <h1 className="mb-4">Favorites</h1>
+      <div className="row row-cols-1 row-cols-md-3 g-4">
         {favorites.map(favorite => (
-          <div key={favorite.id} className="recipe-card">
-            <br />
-            <div className="image-label-container">
-              <div>
-              <p>
-                <a href={favorite.productURL} target="_blank" rel="noopener noreferrer">
-                  {favorite.name}
-                </a>
-                {" "}
-                by {favorite.brand}
-              </p>
-              <p>{favorite.product_type}</p>
-              <p>{favorite.price}</p>
+          <div key={favorite.id} className="col">
+            <div className="card h-100 d-flex flex-column justify-content-between">
+              <div className="card-body">
+                <h5 className="card-title">{favorite.name}</h5>
+                <p className="card-text">Brand: {favorite.brand}</p>
+                <p className="card-text">Product Type: {favorite.product_type}</p>
+                <p className="card-text">Price: ${favorite.price}</p>
               </div>
-              <div className="ingredient-amount-label-secondary">
-                <button onClick={() => deleteFavorite(favorite.id)} type="button" className="btn btn-light">Delete</button>
+              <div className="card-footer text-center">
+                <button onClick={() => deleteFavorite(favorite.id)} type="button" className="btn btn-danger">Delete</button>
               </div>
             </div>
           </div>
