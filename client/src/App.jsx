@@ -8,7 +8,7 @@ import NewUser from "./components/NewUser";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import AddContext from "./Context/AddContext";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
         throw new Error("Incorrect email or password. Please try again.");
       }
     } catch (error) {
-      throw new Error("Error logging in:", + error.message);
+      throw new Error("Error logging in:", +error.message);
     }
   };
 
@@ -57,14 +57,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/try-it" element={<SkincareQuiz/>} />
+          <Route path="/try-it" element={<SkincareQuiz />} />
           <Route path="/new-user" element={<NewUser />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/profile"
             element={
               <PrivateRoute>
-                <Profile/>
+                <Profile />
               </PrivateRoute>
             }
           />
