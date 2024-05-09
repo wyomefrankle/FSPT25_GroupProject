@@ -80,8 +80,22 @@ export default function Profile() {
   };
 
   const filteredFavorites = favorites.filter(favorite => {
+    const price = parseFloat(favorite.price); // Convert price to a number
+    if (filterCriteria.price === "") {
+      return true; // Return true for all favorites if no price filter applied
+    } else if (filterCriteria.price === "<5") {
+      return price < 5;
+    } else if (filterCriteria.price === "5-15") {
+      return price >= 5 && price <= 15;
+    } else if (filterCriteria.price === "15-30") {
+      return price >= 15 && price <= 30;
+    } else if (filterCriteria.price === "30-50") {
+      return price >= 30 && price <= 50;
+    } else if (filterCriteria.price === ">50") {
+      return price > 50;
+    }
     return (
-      (filterCriteria.price === "" || favorite.price === filterCriteria.price) &&
+      // (filterCriteria.price === "" || filterCriteria.price === "<5" || filterCriteria.price === "5-15" || filterCriteria.price === "15-30" || filterCriteria.price === "30-50"||filterCriteria.price === ">50") &&
       (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
       (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type)
     );
@@ -142,9 +156,11 @@ export default function Profile() {
                     onChange={handleFilterChange}
                   >
                     <option value="">All</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    <option value="<5">Less than $5</option>
+                    <option value="5-15">$5 - $15</option>
+                    <option value="15-30">$15 - $30</option>
+                    <option value="30-50">$30 - $50</option>
+                    <option value=">50">Greater than $50</option>
                   </select>
                 </div>
                 <div className="form-group">

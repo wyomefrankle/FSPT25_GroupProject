@@ -42,8 +42,8 @@ function Favorites({ favorites, setFavorites }) {
                 {" "}
                 by {favorite.brand}
               </p>
-              {/* <p>{favorite.product_type}</p> */}
-              {/* <p>{favorite.price}</p> */}
+              <p>{favorite.product_type}</p>
+              <p>{favorite.price}</p>
               </div>
               <div className="ingredient-amount-label-secondary">
                 <button onClick={() => deleteFavorite(favorite.id)} type="button" className="btn btn-light">Delete</button>
