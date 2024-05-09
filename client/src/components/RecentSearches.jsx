@@ -14,7 +14,8 @@ const RecentSearches = () => {
         {recentSearches.slice(-3).map((search, index) => (
           <li key={index}>
             <p>
-              Budget: {search.budget}, Country: {search.country}, Skin Concern:
+              Budget: {search.budget}, Country: {search.country}, Skin Concern:{" "}
+              {""}
               {search.skinconcern}
             </p>
           </li>
