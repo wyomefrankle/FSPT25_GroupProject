@@ -82,24 +82,32 @@ export default function Profile() {
   const filteredFavorites = favorites.filter(favorite => {
     const price = parseFloat(favorite.price); // Convert price to a number
     if (filterCriteria.price === "") {
-      return true; // Return true for all favorites if no price filter applied
+      return (
+        (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
+        (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type)
+      );
     } else if (filterCriteria.price === "<5") {
-      return price < 5;
+      return price < 5 &&
+        (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
+        (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type);
     } else if (filterCriteria.price === "5-15") {
-      return price >= 5 && price <= 15;
+      return (price >= 5 && price <= 15) &&
+        (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
+        (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type);
     } else if (filterCriteria.price === "15-30") {
-      return price >= 15 && price <= 30;
+      return (price >= 15 && price <= 30) &&
+        (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
+        (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type);
     } else if (filterCriteria.price === "30-50") {
-      return price >= 30 && price <= 50;
+      return (price >= 30 && price <= 50) &&
+        (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
+        (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type);
     } else if (filterCriteria.price === ">50") {
-      return price > 50;
+      return price > 50 &&
+        (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
+        (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type);
     }
-    return (
-      // (filterCriteria.price === "" || filterCriteria.price === "<5" || filterCriteria.price === "5-15" || filterCriteria.price === "15-30" || filterCriteria.price === "30-50"||filterCriteria.price === ">50") &&
-      (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
-      (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type)
-    );
-  });
+});
 
   return (
     <div className="container-fluid" style={{
