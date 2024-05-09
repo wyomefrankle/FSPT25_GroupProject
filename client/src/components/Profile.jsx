@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import Picture1 from '../assets/img/Picture1.png';
+import Picture1 from "../assets/img/Picture1.png";
 import Favorites from "./Favorites";
-
 
 export default function Profile() {
   const [bioInput, setBioInput] = useState("");
@@ -26,7 +25,6 @@ export default function Profile() {
     localStorage.setItem("userInput", value);
   };
 
-    
   const getProfile = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -143,9 +141,10 @@ export default function Profile() {
                   <textarea
                     value={bioInput}
                     onChange={handleChange}
-                    className="form-control"
                     placeholder="Tell us about yourself!"
-                    rows="5"
+                    rows="2"
+                    cols="33"
+                    style={{ borderRadius: "10px"}}
                   />
                 </div>
               </div>

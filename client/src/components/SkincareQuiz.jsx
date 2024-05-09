@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom"; 
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import SaveFavoriteModal from "./SaveFavoriteModal";
-import Picture1 from '../assets/img/Picture1.png';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import ClipLoader from 'react-spinners/ClipLoader';
 import '../SkincareQuiz.css';
+import Picture1 from "../assets/img/Picture1.png";
+import RecentSearches from "./RecentSearches";
+
+// import './App.css';
 
 const SkincareQuiz = () => {
-  
   const [budget, setBudget] = useState("");
   const [loading, setLoading] = useState(false);
   const [country, setCountry] = useState("");
@@ -19,7 +21,8 @@ const SkincareQuiz = () => {
   const cleanserImages = ["https://images.unsplash.com/photo-1623143445418-40c192fa3d11?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2tpbmNhcmUlMjBtb2NrdXB8ZW58MHx8MHx8fDA%3D", "https://images.unsplash.com/photo-1597931752949-98c74b5b159f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww", "https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww"]
   const [skintype, setSkintype] = useState(null);
   const [showForm, setShowForm] = useState(true); // State to toggle between form and recommendations
-  
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const getProfile = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -32,7 +35,6 @@ const SkincareQuiz = () => {
       if (response.ok) {
         const json = await response.json();
         setSkintype(json.skintype);
-        console.log(json.skintype);
       } else {
         throw new Error("Failed to fetch profile");
       }
@@ -41,51 +43,61 @@ const SkincareQuiz = () => {
     }
   };
 
-  const getSkincareQuiz = async ( skintype, budget, country, skinconcern ) => {
-
+  const getSkincareQuiz = async (skintype, budget, country, skinconcern) => {
     try {
       const url = `http://localhost:4000/users?skintype=${skintype}&budget=${budget}&country=${country}&skinconcern=${skinconcern}`;
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       });
-  
+
       if (!response.ok) {
-        throw new Error(`Failed to fetch skincare quiz: ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch skincare quiz: ${response.statusText}`
+        );
       }
-  
+
       const data = await response.json();
       console.log("Data from server:", data);
       setSkincareRecommendations(JSON.parse(data.text));
-      console.log(JSON.parse(data.text))
-      console.log("Product type is: ", JSON.parse(data.text)[0].product_type)
-      setLoading(false);
       setShowForm(false);
+      console.log(JSON.parse(data.text));
+      console.log("Product type is: ", JSON.parse(data.text)[0].product_type);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching skincare quiz results:', error);
+      console.error("Error fetching skincare quiz results:", error);
       setLoading(false);
       return []; // Return an empty array in case of an error
     }
   };
 
-  const handleBudget = event => {
+  const handleBudget = (event) => {
     setBudget(event.target.value);
   };
 
   const handleCountry = (event) => {
-    setCountry(event.target.value)
+    setCountry(event.target.value);
   };
 
   const handleSkinconcern = (event) => {
-    setSkinconcern(event.target.value)
+    setSkinconcern(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
     getSkincareQuiz(skintype, budget, country, skinconcern);
+
+    // Save recent searches to localStorage
+    const recentSearch = { budget, country, skinconcern };
+    const recentSearches =
+      JSON.parse(localStorage.getItem("recentSearches")) || [];
+    recentSearches.push(recentSearch);
+    localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+
+    setFormSubmitted(true);
   };
 
   function getProductImage(productType, index) {
@@ -103,30 +115,31 @@ const SkincareQuiz = () => {
     }
   }
 
-  const saveFavorite = async (product) => { 
+  const saveFavorite = async (product) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`http://localhost:4000/api/favorites`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify(product),
       });
-  
+
       if (!response.ok) {
-        throw new Error(`Failed to save favorite product: ${response.statusText}`);
+        throw new Error(
+          `Failed to save favorite product: ${response.statusText}`
+        );
       }
-  
+
       const data = await response.json();
-      console.log('Response from server:', data);
+      console.log("Response from server:", data);
       // setMyFavorites(data)
     } catch (error) {
-      console.error('Error saving favorite product:', error);
+      console.error("Error saving favorite product:", error);
     }
   };
-
 
   const handleSaveFavorite = (product) => {
     saveFavorite(product);
@@ -135,7 +148,7 @@ const SkincareQuiz = () => {
 
   useEffect(() => {
     getProfile();
-  }, []);
+  });
 
   return (
     <div className='background-image-container'>
@@ -238,6 +251,9 @@ const SkincareQuiz = () => {
             <button className="btn btn-light" onClick={() => setShowForm(true)}>
               Refresh Recommendations
             </button>
+            <br/>
+            <br/>
+            {formSubmitted && !loading && <RecentSearches />}
           </div>
         )}
         {loading && (
