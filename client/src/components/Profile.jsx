@@ -106,8 +106,9 @@ export default function Profile() {
                 value={bioInput}
                 onChange={handleChange}
                 placeholder="Tell us about yourself!"
-                rows="5"
+                rows="2"
                 cols="33"
+                style={{ borderRadius: "10px"}}
               />
             </div>
           </div>
