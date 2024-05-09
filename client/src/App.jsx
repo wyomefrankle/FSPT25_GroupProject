@@ -4,7 +4,6 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import SkincareQuiz from "./components/SkincareQuiz";
-// import RecentSearches from "./components/RecentSearches";
 import NewUser from "./components/NewUser";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
