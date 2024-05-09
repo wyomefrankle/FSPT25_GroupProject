@@ -40,6 +40,7 @@ const SkincareQuiz = () => {
     "https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNraW5jYXJlJTIwbW9ja3VwfGVufDB8fDB8fHww",
   ];
   const [skintype, setSkintype] = useState(null);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const getProfile = async () => {
     const token = localStorage.getItem("token");
@@ -114,6 +115,8 @@ const SkincareQuiz = () => {
       JSON.parse(localStorage.getItem("recentSearches")) || [];
     recentSearches.push(recentSearch);
     localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+
+    setFormSubmitted(true);
   };
 
   function getProductImage(productType, index) {
@@ -309,7 +312,7 @@ Aging"
         </div>
       )}
 
-      <RecentSearches />
+      {formSubmitted && <RecentSearches />}
     </div>
   );
 };
