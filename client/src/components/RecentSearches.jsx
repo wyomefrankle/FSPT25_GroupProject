@@ -13,9 +13,10 @@ const RecentSearches = () => {
       <ul>
         {recentSearches.slice(-3).map((search, index) => (
           <li key={index}>
-            <p>Budget: {search.budget}</p>
-            <p>Country: {search.country}</p>
-            <p>Skin Concern: {search.skinconcern}</p>
+            <p>
+              Budget: {search.budget}, Country: {search.country}, Skin Concern:
+              {search.skinconcern}
+            </p>
           </li>
         ))}
       </ul>
