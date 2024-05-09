@@ -9,7 +9,7 @@ const RecentSearches = () => {
 
   return (
     <div>
-      <h4>Recently Searched: 🔎</h4>
+      <h4>Recent Searches: 🔎</h4>
       <ul>
         {recentSearches.slice(-3).map((search, index) => (
           <li key={index}>
