@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Picture1 from "../assets/img/Picture1.png";
 import Favorites from "./Favorites";
+import "../SkincareQuiz.css";
 
 export default function Profile() {
   const [bioInput, setBioInput] = useState("");
@@ -107,52 +108,42 @@ export default function Profile() {
     }
 });
 
-  return (
-    <div className="container-fluid" style={{
-      backgroundImage: `url(${Picture1})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      height: "100vh",
-      width: "100vw"
-    }}>
-      {data && (
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <br/>
-            <br/>
+
+return (
+  <div className="background-image-container">
+    <br />
+    <br />
+    <br />
+    {data && (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4 mb-4">
             <div className="card bg-light">
               <div className="card-body text-center">
-                <h2 className="card-title">Profile</h2>
-                <div className="row">
-                  <div className="col">
+              <h2>🍊 User Bio 🍊</h2>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <form style={{ textAlign: "left" }}>
                     <p><strong>Name:</strong> {data.firstname}</p>
-                    <p><strong>My Skin Type:</strong> {data.skintype}</p>
-                  </div>
-                </div>
-                <div className="user-bio">
-                  <h3 className="mt-4">🍊 User Bio 🍊</h3>
-                  <form>
-                    <p>
-                      <strong>Followers:</strong> 0 <br /><strong>Following:</strong> 0
-                    </p>
-                    <p><strong>Location:</strong></p>
-                  </form>
+                    <p><strong>Skin Type:</strong> {data.skintype}</p>
+                    <p><strong>Followers:</strong> 0 </p>
+                    <p><strong>Following:</strong> 0</p>
                   <textarea
                     value={bioInput}
                     onChange={handleChange}
                     placeholder="Tell us about yourself!"
                     rows="2"
                     cols="33"
-                    style={{ borderRadius: "10px"}}
+                    style={{ borderRadius: "10px" }}
                   />
+                </form>
                 </div>
               </div>
             </div>
-            <br/>
+          </div>
+          <div className="col-md-8 mb-4">
             <div className="card bg-light">
               <div className="card-body text-center">
-                <h2 className="card-title">Favorites</h2>
+                <h2 className="card-title"> 🍋 Favorites 🍋</h2>
                 <div className="form-group">
                   <label htmlFor="priceFilter">Price:</label>
                   <select
@@ -197,12 +188,15 @@ export default function Profile() {
                     <option value="Moisturizer">Moisturizer</option>
                   </select>
                 </div>
+                <br/>
+                <br/>
                 <Favorites favorites={filteredFavorites} setFavorites={setFavorites} />
               </div>
             </div>
           </div>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
 }
