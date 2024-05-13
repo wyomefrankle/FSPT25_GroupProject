@@ -5,6 +5,8 @@ import Favorites from "./Favorites";
 export default function Profile() {
   const [bioInput, setBioInput] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [avatar, setAvatar] = useState([]);
   const [data, setData] = useState(null);
   const [filterCriteria, setFilterCriteria] = useState({
     price: "",
@@ -19,6 +21,8 @@ export default function Profile() {
     }
   }, []);
 
+ 
+
   const handleChange = (e) => {
     const value = e.target.value;
     setBioInput(value);
@@ -26,7 +30,9 @@ export default function Profile() {
   };
 
   const getProfile = async () => {
+    console.log("Fetching user profile data, favorites, and avatar images");
     const token = localStorage.getItem("token");
+    console.log("Authentication token:", token);
     try {
       const response = await fetch("/api/profile", {
         headers: {
@@ -50,6 +56,7 @@ export default function Profile() {
   const getFavorites = async () => {
     try {
       const token = localStorage.getItem("token");
+      console.log("Authentication token:", token);
       const response = await fetch("/api/favorites", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -67,10 +74,82 @@ export default function Profile() {
     }
   };
 
+
+  const onFileUpload = async () => {
+    try {
+      console.log("Uploading avatar...");
+      const formData = new FormData();
+      formData.append("avatarfile", selectedFile, selectedFile.name);
+  
+      const token = localStorage.getItem("token");
+      console.log("Authentication token:", token);
+      const res = await fetch("/api/avatar", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          
+        },
+        body: formData,
+      });
+  
+      if (!res.ok) {
+        throw new Error("Failed to upload avatar");
+      }
+  
+      const data = await res.json();
+      console.log(data);
+      setAvatar(data.avatar);
+      getAvatar(); // Fetch the updated list of avatars
+        alert("Avatar uploaded successfully 🍋!");
+    } catch (error) {
+      console.error("Error uploading avatar:", error);
+    }
+  };
+
+  const getAvatar = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log("Authorization token:", token);
+      const response = await fetch("/api/avatar", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch avatars");
+      }
+  
+      const data = await response.json();
+      console.log("Avatar data:", data);
+      setAvatar(data);
+    } catch (error) {
+      console.error("Error fetching avatars:", error);
+      // Display error message to the user
+      alert("Failed to fetch avatars. Please try again.");
+      setAvatar([]); // Set images to an empty array 
+    }
+  };
+  
+  
+
+  
+  const onFileChange = (event) => {
+    console.log("File selected for upload:", event.target.files[0]);
+    setSelectedFile(event.target.files[0])
+    alert("Click to upload Avatar 👀!");
+  };
+
+  
   useEffect(() => {
     getProfile();
     getFavorites(); // Call getFavorites when the component mounts
+    getAvatar();
   }, []);
+
+
+  
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -107,7 +186,7 @@ export default function Profile() {
     }
 });
 
-  return (
+return (
     <div className="container-fluid" style={{
       backgroundImage: `url(${Picture1})`,
       backgroundSize: "cover",
@@ -119,8 +198,8 @@ export default function Profile() {
       {data && (
         <div className="row justify-content-center">
           <div className="col-md-6">
-            <br/>
-            <br/>
+            <br />
+            <br />
             <div className="card bg-light">
               <div className="card-body text-center">
                 <h2 className="card-title">Profile</h2>
@@ -131,6 +210,23 @@ export default function Profile() {
                   </div>
                 </div>
                 <div className="user-bio">
+                  {selectedFile && (
+                    <img
+                      src={URL.createObjectURL(selectedFile)}
+                      alt="Avatar"
+                      className="avatar-image"
+                    />
+                  )}
+  
+                  {!selectedFile && avatar && avatar.map((image) => (
+                    <img
+                      key={image.id}
+                      src={`/img/${image.avatar}`}
+                      alt="Avatar"
+                      className="avatar-image"
+                    />
+                  ))}
+  
                   <h3 className="mt-4">🍊 User Bio 🍊</h3>
                   <form>
                     <p>
@@ -144,12 +240,20 @@ export default function Profile() {
                     placeholder="Tell us about yourself!"
                     rows="2"
                     cols="33"
-                    style={{ borderRadius: "10px"}}
+                    style={{ borderRadius: "10px" }}
                   />
+                  <h6 className="upload-title">Upload Picture!</h6>
+                  <input type="file" onChange={onFileChange} style={{ display: 'none' }} id="fileInput" />
+                  <label htmlFor="fileInput" className="custom-file-upload">
+                    Choose File
+                  </label>
+                  <button onClick={onFileUpload} className="custom-upload-button">
+                    Upload
+                  </button>
                 </div>
               </div>
             </div>
-            <br/>
+            <br />
             <div className="card bg-light">
               <div className="card-body text-center">
                 <h2 className="card-title">Favorites</h2>

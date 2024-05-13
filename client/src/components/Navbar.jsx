@@ -6,6 +6,7 @@ const Navbar = () => {
   const { isLoggedIn, logout } = useContext(AddContext);
   const navigate = useNavigate();
   const location = useLocation();
+ 
 
   const handleLogout = () => {
     logout();

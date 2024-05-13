@@ -1,6 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
+const fs = require("fs/promises");
+const path = require("path");
+const { v4: uuidv4 } = require("uuid");
+const mime = require("mime-types");
+const multer = require("multer");
+const upload = multer({ dest: "public/img/" });
 require("dotenv").config();
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
@@ -8,6 +14,7 @@ const saltRounds = 10;
 const userShouldBeLoggedin = require("../guards/userShouldBeLoggedin");
 
 const supersecret = process.env.SUPER_SECRET;
+
 
 
 router.get("/users", function(req, res, next) {
@@ -40,6 +47,7 @@ router.post("/users", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 router.post("/users/login", async(req, res) => {
   const { email, password } = req.body;
@@ -77,6 +85,8 @@ router.get("/profile", userShouldBeLoggedin, async (req, res) => {
   }
 });
 
+
+
 router.get('/auth/status', userShouldBeLoggedin, (req, res) => {
   try {
       // If userShouldBeLoggedin middleware passes, user is authenticated
@@ -87,6 +97,67 @@ router.get('/auth/status', userShouldBeLoggedin, (req, res) => {
       res.status(401).json({ authenticated: false, message: 'User is not authenticated' });
   }
 });
+
+
+
+// Function to fetch avatars for all users
+const getAvatar = async (req, res) => {
+  try {
+    const results = await db("SELECT id, avatar FROM users;");
+    res.send(results.data);
+  } catch (err) {
+    // Handle any errors that occur during the database query
+    res.status(500).send(err);
+  }
+};
+
+// Endpoint to handle GET requests for avatars
+router.get("/avatar", userShouldBeLoggedin, getAvatar);
+
+// Endpoint to handle POST requests for uploading avatars
+router.post("/avatar", userShouldBeLoggedin, upload.single("avatarfile"), async (req, res) => {
+  console.log("Request received to upload avatar:", req.file);
+
+  const avatarfile = req.file;
+
+  // Check if a file was uploaded
+  if (!avatarfile) {
+    console.log("No file uploaded");
+    return res.status(400).json({ error: "No file uploaded" });
+  }
+
+  // Extract file extension and generate a unique filename
+  const extension = mime.extension(avatarfile.mimetype);
+  const filename = uuidv4() + "." + extension;
+
+  // Define paths for temporary and target locations
+  const tmp_path = avatarfile.path;
+  const target_path = path.join(__dirname, "../public/img/") + filename;
+
+  try {
+    // Move the uploaded file to the target location
+    await fs.rename(tmp_path, target_path);
+
+    // Retrieve the user ID from the request
+    const userId = req.user_id;
+    console.log("User id:", req.user_id);
+
+    // Update the user's avatar filename in the database
+    await db(`UPDATE users SET avatar = "${filename}" WHERE id = ${userId}`);
+    console.log("Avatar uploaded successfully");
+
+    // Retrieve and send updated avatar data to the client
+    getAvatar(req, res);
+
+    // Send a success response (commented out for now)
+    // res.status(201).json({ message: "Avatar uploaded successfully" });
+  } catch (err) {
+    // Handle errors that occur during file upload or database update
+    console.error("Error uploading avatar", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 
 router.delete("/users/:id", async (req, res) => {

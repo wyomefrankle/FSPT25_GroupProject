@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Picture1 from '../assets/img/Picture1.png';
 import Picture2 from '../assets/img/Picture2.jpg';
-
+import Picture3 from '../assets/img/Picture3.jpg';
+import Picture4 from '../assets/img/Picture4.jpg';
 const About = () => {
   return (
     <div style={{
@@ -27,7 +28,9 @@ const About = () => {
         Pineda, and Meg Chary.
       </p>
     <div className= "pictures">
-      <img src= {Picture2} alt="Picture 2" style ={{ borderRadius: "50%", width:"120px", height: "120px" }}/>
+      <img src= {Picture4} alt="Picture 4" style ={{ borderRadius: "50%", width:"110px", height: "130px", marginRight: "20px"  }}/>
+      <img src= {Picture2} alt="Picture 2" style ={{ borderRadius: "50%", width:"120px", height: "130px", marginRight: "20px"  }}/>
+      <img src= {Picture3} alt="Picture 3" style ={{ borderRadius: "50%", width:"120px", height: "130px" }}/>
     </div>
     </div>
     </div>

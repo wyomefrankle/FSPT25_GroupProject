@@ -12,7 +12,8 @@ import { useState, useEffect } from "react";
 import AddContext from "./Context/AddContext";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+
 
   const login = async (credentials) => {
     try {

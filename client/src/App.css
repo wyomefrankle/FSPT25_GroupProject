@@ -261,3 +261,41 @@ html, body{
 
 }
 
+.upload-title{
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  color: #d3783f;
+}
+
+.avatar-image {
+  border-radius: 50%;
+  width: 100px; 
+  height: 100px; 
+  
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 2px 12px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #212529;
+  border-radius: 4px;
+}
+
+.custom-upload-button {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 2px 12px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #212529;
+  border-radius: 4px;
+  margin-left: 10px;
+  
+}
+
+.custom-file-upload:hover,
+.custom-upload-button:hover {
+  background-color: #e89765;
+}
