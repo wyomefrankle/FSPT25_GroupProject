@@ -20,6 +20,7 @@ CREATE TABLE users(
     -- user password
     password TEXT NOT null,
     skintype VARCHAR(255),
+    avatar VARCHAR(255),
     PRIMARY KEY (id)
 );
 
