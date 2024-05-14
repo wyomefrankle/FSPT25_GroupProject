@@ -3,6 +3,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat; /* Set background repeat */
+    background-color: #fde6cc; /* Light peach color */
     height: 100vh;
     width: 100vw;
 }
@@ -14,4 +15,9 @@
     transform: translate(-50%, -50%);
     text-align: center;
   }
-  
+
+  .product-title {
+    color: #d3783f;
+    text-shadow: 0 0 0.15em white;
+	-webkit-text-stroke: 0.2px white;
+  }

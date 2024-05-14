@@ -1,0 +1,26 @@
+.card-container {
+    padding: 10px; /* Adjust the padding as needed */
+  }
+  
+  .card {
+    background-color: #f9f9f9; /* Add background color to the card */
+    padding: 10px; /* Add padding to the inside of the card */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    width: fit-content; /* Set width to fit content */
+    margin: 0 auto; /* Center the card horizontally */
+  }
+  
+  .card h4 {
+    margin-bottom: 10px; /* Add space below the heading */
+  }
+  
+  .card ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .card li {
+    margin-bottom: 5px; /* Add space between list items */
+  }
+  

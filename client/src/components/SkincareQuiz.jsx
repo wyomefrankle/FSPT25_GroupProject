@@ -212,7 +212,7 @@ const SkincareQuiz = () => {
                 <div key={index}>
                   <br/>
                   <br/>
-                  <h1 className="card-title">{productType}</h1>
+                  <h1 className="product-title">{productType}</h1>
                   <div className="row">
                     {recommendations.map((recommendation, recIndex) => (
                       <div className="col-md-4 col-sm-6 mb-4" key={recommendation.id}>

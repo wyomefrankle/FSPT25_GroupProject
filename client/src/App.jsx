@@ -51,9 +51,9 @@ function App() {
   return (
     <AddContext.Provider value={AddObject}>
       <div className="App">
-        <h1 className={location.pathname === "/" ? "home-heading" : ""}>
+        {/* <h1 className={location.pathname === "/" ? "home-heading" : ""}> */}
           {/* Skinfinity */}
-        </h1>
+        {/* </h1> */}
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

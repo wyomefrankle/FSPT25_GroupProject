@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Picture1 from "../assets/img/Picture1.png";
 import Favorites from "./Favorites";
+import "../SkincareQuiz.css";
 
 export default function Profile() {
   const [bioInput, setBioInput] = useState("");
@@ -20,8 +21,6 @@ export default function Profile() {
       setBioInput(savedInput);
     }
   }, []);
-
- 
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -132,24 +131,17 @@ export default function Profile() {
     }
   };
   
-  
-
-  
   const onFileChange = (event) => {
     console.log("File selected for upload:", event.target.files[0]);
     setSelectedFile(event.target.files[0])
     alert("Click to upload Avatar 👀!");
   };
 
-  
   useEffect(() => {
     getProfile();
     getFavorites(); // Call getFavorites when the component mounts
     getAvatar();
   }, []);
-
-
-  
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -184,31 +176,19 @@ export default function Profile() {
         (filterCriteria.brand === "" || favorite.brand === filterCriteria.brand) &&
         (filterCriteria.product_type === "" || favorite.product_type === filterCriteria.product_type);
     }
-});
+  });
 
-return (
-    <div className="container-fluid" style={{
-      backgroundImage: `url(${Picture1})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      height: "100vh",
-      width: "100vw"
-    }}>
-      {data && (
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <br />
-            <br />
+  return (
+    <div className="background-image-container">
+      <br />
+      <br />
+      <br />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
             <div className="card bg-light">
               <div className="card-body text-center">
-                <h2 className="card-title">Profile</h2>
-                <div className="row">
-                  <div className="col">
-                    <p><strong>Name:</strong> {data.firstname}</p>
-                    <p><strong>My Skin Type:</strong> {data.skintype}</p>
-                  </div>
-                </div>
+                <h2>🍊 User Bio 🍊</h2>
                 <div className="user-bio">
                   {selectedFile && (
                     <img
@@ -217,7 +197,7 @@ return (
                       className="avatar-image"
                     />
                   )}
-  
+
                   {!selectedFile && avatar && avatar.map((image) => (
                     <img
                       key={image.id}
@@ -226,37 +206,38 @@ return (
                       className="avatar-image"
                     />
                   ))}
-  
-                  <h3 className="mt-4">🍊 User Bio 🍊</h3>
+                </div>
+                <div style={{ textAlign: "left" }}>
                   <form>
-                    <p>
-                      <strong>Followers:</strong> 0 <br /><strong>Following:</strong> 0
-                    </p>
-                    <p><strong>Location:</strong></p>
+                    <p><strong>Name:</strong> {data && data.firstname}</p>
+                    <p><strong>Skin Type:</strong> {data && data.skintype}</p>
+                    <p><strong>Followers:</strong> 0</p>
+                    <p><strong>Following:</strong> 0</p>
+                    <textarea
+                      value={bioInput}
+                      onChange={handleChange}
+                      placeholder="Tell us about yourself!"
+                      rows="2"
+                      cols="33"
+                      style={{ borderRadius: "10px" }}
+                    />
+                    <h6 className="upload-title">Upload Picture!</h6>
+                    <input type="file" onChange={onFileChange} style={{ display: 'none' }} id="fileInput" />
+                    <label htmlFor="fileInput" className="custom-file-upload">
+                      Choose File
+                    </label>
+                    <button onClick={onFileUpload} className="custom-upload-button">
+                      Upload
+                    </button>
                   </form>
-                  <textarea
-                    value={bioInput}
-                    onChange={handleChange}
-                    placeholder="Tell us about yourself!"
-                    rows="2"
-                    cols="33"
-                    style={{ borderRadius: "10px" }}
-                  />
-                  <h6 className="upload-title">Upload Picture!</h6>
-                  <input type="file" onChange={onFileChange} style={{ display: 'none' }} id="fileInput" />
-                  <label htmlFor="fileInput" className="custom-file-upload">
-                    Choose File
-                  </label>
-                  <button onClick={onFileUpload} className="custom-upload-button">
-                    Upload
-                  </button>
                 </div>
               </div>
             </div>
-            <br />
-            <div className="card bg-light">
+          </div>
+          <div className="col-md-8">
+            <div className="card bg-light" style={{ width: "100%" }}>
               <div className="card-body text-center">
-                <h2 className="card-title">Favorites</h2>
+                <h2 className="card-title"> 🍋 Favorites 🍋</h2>
                 <div className="form-group">
                   <label htmlFor="priceFilter">Price:</label>
                   <select
@@ -301,12 +282,13 @@ return (
                     <option value="Moisturizer">Moisturizer</option>
                   </select>
                 </div>
+                <br/>
                 <Favorites favorites={filteredFavorites} setFavorites={setFavorites} />
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

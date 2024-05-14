@@ -28,8 +28,8 @@ function Favorites({ favorites, setFavorites }) {
 
   return (
     <div>
-      <h1 className="mb-4">Favorites</h1>
-      <div className="row row-cols-1 row-cols-md-3 g-4">
+      {/* <h1 className="mb-4">Favorites</h1> */}
+      <div className="row row-cols-1 row-cols-md-3 g-4 custom-background-row">
         {favorites.map(favorite => (
           <div key={favorite.id} className="col">
             <div className="card h-100 d-flex flex-column justify-content-between">
